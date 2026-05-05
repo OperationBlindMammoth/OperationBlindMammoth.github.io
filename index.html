@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Densmore Drone Services | Agricultural Mapping</title>
+    <meta name="description" content="Precision multispectral mapping for Southeast Texas farmers. Cut fertilizer costs and boost yields.">
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles - Modern Ag-Tech Palette */
+        :root {
+            --primary-green: #2E7D32; /* Deep Forest Green */
+            --accent-color: #E65100; /* Burnt Orange for CTA */
+            --bg-light: #F4F6F4; /* Subtle earthy off-white */
+            --card-border: #81C784; /* Lighter green for accents */
+            --text-dark: #1F2937;
+            --text-light: #4B5563;
+            --white: #FFFFFF;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            background-color: var(--white);
+        }
+
+        h1, h2, h3 {
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 14px 28px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: #BF360C;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('drone_hero_image.png') center/cover;
+            color: var(--white);
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+
+        /* ROI Section */
+        .roi-section {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .roi-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 300px;
+            border-bottom: 5px solid var(--primary-green);
+        }
+
+        .stat-box h3 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin: 0 0 10px 0;
+        }
+
+        /* Tech & Science Section */
+        .science-section {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .science-text {
+            flex: 1;
+        }
+
+        .science-image {
+            flex: 1;
+            background-color: var(--bg-light);
+            min-height: 300px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-weight: 600;
+            border: 1px dashed var(--card-border);
+        }
+
+        /* Crops Section */
+        .crops-section {
+            background-color: var(--bg-light);
+            padding: 80px 0;
+        }
+
+        .crop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .crop-card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border-top: 5px solid var(--primary-green);
+            transition: transform 0.3s ease;
+        }
+        
+        .crop-card:hover {
+            transform: translateY(-5px);
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .crop-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .crop-content {
+            padding: 25px;
+        }
+
+        .crop-card h3 {
+            color: var(--text-dark);
+            margin-top: 0;
+        }
+
+        .crop-content ul {
+            padding-left: 20px;
+            color: var(--text-light);
+        }
+
+        .crop-content li {
+            margin-bottom: 10px;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--bg-light);
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .science-section {
+                flex-direction: column;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1>Precision Multi-Spectral Mapping for Southeast Texas</h1>
+            <p>Cut fertilizer costs by 20% and boost yields with data-driven insights. See exactly what your crops need, before the naked eye can.</p>
+            <a href="#demo" class="btn">Schedule Your Free 50-Acre Demo</a>
+        </div>
+    </header>
+
+    <!-- ROI Section -->
+    <section class="roi-section">
+        <div class="container">
+            <h2>The Math Makes Sense</h2>
+            <p>According to research by Purdue University, precision application guided by multispectral imaging saves 20% on fertilizer costs.</p>
+            <div class="roi-stats">
+                <div class="stat-box">
+                    <h3>$7</h3>
+                    <p>Per Acre Investment</p>
+                </div>
+                <div class="stat-box">
+                    <h3>$10-$20</h3>
+                    <p>Typical Per Acre Savings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Science Section -->
+    <section class="science-section container">
+        <div class="science-image">
+            <img src="NDVI_Cotton1_with_margin.png" alt="Multispectral NDVI Map" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        </div>
+        <div class="science-text">
+            <h2>Make More Informed Decisions</h2>
+            <p>Standard cameras only show plant stress that is already visible. We utilize enterprise-grade DJI Mavic 3 Multispectral to capture <strong>Near-Infrared (NIR) light</strong> to show you plant stress that isn't yet visible.</p>
+            <p>Healthy crops reflect high amounts of NIR and strongly absorb red light. By capturing these specific bands, we generate highly accurate vegetation index maps (such as NDVI) that highlight plant stress, nutrient deficiencies, and irrigation issues weeks before they become visible to the human eye.</p>
+        </div>
+    </section>
+
+    <!-- Specific Crops Section -->
+    <section class="crops-section">
+        <div class="container">
+            <h2 style="text-align: center;">Tailored Analytics for Local Operations</h2>
+            <div class="crop-grid">
+                
+                <!-- Cotton Card -->
+                <div class="crop-card">
+                    <img src="cotton.avif" alt="Cotton Field" class="crop-image">
+                    <div class="crop-content">
+                        <h3>Cotton</h3>
+                        <ul>
+                            <li>Precisely apply <strong>fertilizer</strong> and <strong>growth regulator</strong> to manage plant vigor.</li>
+                            <li>Time your <strong>defoliant</strong> based on crop maturity maps, not guesswork.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Corn Card -->
+                <div class="crop-card">
+                    <img src="corn.avif" alt="Corn Field" class="crop-image">
+                    <div class="crop-content">
+                        <h3>Corn</h3>
+                        <ul>
+                            <li>Detect nitrogen deficiencies for targeted <strong>mid-season fertilizer applications</strong> to maximize your yields.</li>
+                            <li>Quickly identify and scout areas showing early signs of <strong>stress from pests</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rice Card -->
+                <div class="crop-card">
+                    <img src="rice.avif" alt="Rice Field" class="crop-image">
+                    <div class="crop-content">
+                        <h3>Rice</h3>
+                        <ul>
+                            <li>Closely monitor canopy density to <strong>prevent overgrowth</strong>, which can lead to lodging and disease.</li>
+                            <li>Track uniform growth and manage water levels for maximum harvest efficiency.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Gen / Form Section -->
+    <section id="demo" class="form-section">
+        <div class="container">
+            <h2>Claim Your Free 50-Acre Demonstration</h2>
+            <p style="margin-bottom: 30px;">No strings attached. Let the data speak for itself.</p>
+            
+            <!-- Paste your Jotform Embed Code Here -->
+            <div style="background: var(--bg-light); padding: 40px; border-radius: 8px; max-width: 600px; margin: 0 auto; border: 2px solid var(--primary-green);">
+                <p><em>
+                    <iframe
+                      id="JotFormIFrame-260397075726061"
+                      title="Check availability"
+                      onload="window.parent.scrollTo(0,0)"
+                      allowtransparency="true"
+                      allow="geolocation; microphone; camera; fullscreen; payment"
+                      src="https://form.jotform.com/260397075726061"
+                      frameborder="0"
+                      style="min-width:100%;max-width:100%;height:539px;border:none;"
+                      scrolling="no"
+                    >
+                    </iframe>
+                    <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+                    <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-260397075726061']", "https://form.jotform.com/")</script>
+                    </em></p>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer for Local SEO -->
+    <footer>
+        <div class="container">
+            <h3 style="color: var(--white);">Densmore Drone Services</h3>
+            <p>Serving the farmers of Southeast Texas</p>
+            <p>Fully Part 107 Certified</p>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: #9CA3AF;">&copy; 2026 Densmore Drone Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
