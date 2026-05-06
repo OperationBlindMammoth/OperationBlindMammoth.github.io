@@ -162,6 +162,17 @@
             border-top: 5px solid var(--primary-green);
             transition: transform 0.3s ease;
         }
+
+        .crop-badge {
+            display: inline-block;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 0 10px;
+            font-size: 0.9rem;
+        }
         
         .crop-card:hover {
             transform: translateY(-5px);
@@ -221,9 +232,13 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="container">
-            <h1>Precision Multi-Spectral Mapping for Southeast Texas</h1>
-            <p>Cut fertilizer costs by 20% and boost yields with data-driven insights. See exactly what your crops need, before the naked eye can.</p>
+            <!-- <h1>Precision Multi-Spectral Mapping for Southeast Texas</h1> -->
+             <h1>Make better decisions with Precision Agriculture</h1>
+             <h3>Cotton | Corn | Rice</h3>
+            <p>Cut fertilizer costs by 20%*<br>Boost yields with data-driven insights. <br> See exactly what your crops need,<br> before the naked eye can.</p>
             <a href="#demo" class="btn">Schedule Your Free 50-Acre Demo</a>
+            <p>Densmore Drone Services | Serving the farmers of Southeast Texas</p>
+            
         </div>
     </header>
 
@@ -231,17 +246,23 @@
     <section class="roi-section">
         <div class="container">
             <h2>The Math Makes Sense</h2>
-            <p>According to research by Purdue University, precision application guided by multispectral imaging saves 20% on fertilizer costs.</p>
+            <p>*According to research by Purdue University, precision application guided by multispectral imaging saves on average 20% on fertilizer costs.</p>
             <div class="roi-stats">
                 <div class="stat-box">
-                    <h3>$7</h3>
+                    <h3>$5</h3>
                     <p>Per Acre Investment</p>
                 </div>
                 <div class="stat-box">
                     <h3>$10-$20</h3>
                     <p>Typical Per Acre Savings</p>
                 </div>
+                
             </div>
+            <!-- <div style="text-align: center; margin-top: 20px;">
+                <span class="crop-badge">Cotton</span>
+                <span class="crop-badge">Corn</span>
+                <span class="crop-badge">Rice</span>
+            </div> -->
         </div>
     </section>
 
@@ -251,16 +272,26 @@
             <img src="NDVI_Cotton1_with_margin.png" alt="Multispectral NDVI Map" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
         </div>
         <div class="science-text">
+            <h2>Cut costs</h2>
+            <p>Use less fertilizer, growth regulator, and defoliant.</p>
+
+            <h2>Protect your yields</h2>
+            <p>Find pests and fungus sooner.</p>
+            <p>Don't apply growth regulator on plants that don't need it.</p>
+            
+
             <h2>Make More Informed Decisions</h2>
-            <p>Standard cameras only show plant stress that is already visible. We utilize enterprise-grade DJI Mavic 3 Multispectral to capture <strong>Near-Infrared (NIR) light</strong> to show you plant stress that isn't yet visible.</p>
+            <p>When it's time to make important decisions about your crops, don't you want the best information?</p>
+            <p>The human eye can only see plant stress that is already visible. We utilize enterprise-grade DJI Mavic 3 Multispectral to capture <strong>Near-Infrared (NIR) light</strong> to show you plant stress that isn't yet visible.</p>
             <p>Healthy crops reflect high amounts of NIR and strongly absorb red light. By capturing these specific bands, we generate highly accurate vegetation index maps (such as NDVI) that highlight plant stress, nutrient deficiencies, and irrigation issues weeks before they become visible to the human eye.</p>
+            <p>You can import our maps to your Variable-Rate Application (VRA) sprayers.</p>
         </div>
     </section>
 
     <!-- Specific Crops Section -->
     <section class="crops-section">
         <div class="container">
-            <h2 style="text-align: center;">Tailored Analytics for Local Operations</h2>
+            <h2 style="text-align: center;">How can I use this information?</h2>
             <div class="crop-grid">
                 
                 <!-- Cotton Card -->
@@ -282,7 +313,7 @@
                         <h3>Corn</h3>
                         <ul>
                             <li>Detect nitrogen deficiencies for targeted <strong>mid-season fertilizer applications</strong> to maximize your yields.</li>
-                            <li>Quickly identify and scout areas showing early signs of <strong>stress from pests</strong>.</li>
+                            <li>Quickly scout and identify and areas showing early signs of <strong>stress from pests</strong>.</li>
                         </ul>
                     </div>
                 </div>
@@ -329,6 +360,25 @@
                     </em></p>
             </div>
             
+        </div>
+    </section>
+    <!-- How it Works Section -->
+    <section class="science-section container" style="padding-top: 20px; padding-bottom: 80px;">
+        <div class="science-text">
+            <h2>How does it work?</h2>
+            <p>Healthy plant structures strongly reflect <strong>Near-Infrared (NIR) light</strong>, while the plant's chlorophyll absorbs almost all <strong>red light</strong> for photosynthesis.</p>
+            
+            <p>In a healthy crop, there is a massive difference between the high levels of reflected NIR and the low levels of reflected red light. However, as a plant becomes stressed, its cellular structure degrades (reflecting less NIR) and its chlorophyll breaks down (reflecting more red light).</p>
+            
+            <p>Because humans cannot see NIR light, we cannot detect this shrinking difference until the plant is already visibly yellowing and dying. Our drone sensors capture this invisible data, allowing you to intervene weeks earlier.</p>
+            
+            <p style="margin-top: 20px; border-left: 4px solid var(--primary-green); padding-left: 15px; color: var(--text-light);">
+                <em>NASA has been using multispectral imaging and vegetation indices for decades. We are bringing this enterprise-level technology directly to your farm.</em>
+            </p>
+        </div>
+        
+        <div class="science-image" style="background: none; border: none;">
+            <img src="how_ndvi_works.png" alt="How NDVI works" style="width: 100%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
         </div>
     </section>
 
