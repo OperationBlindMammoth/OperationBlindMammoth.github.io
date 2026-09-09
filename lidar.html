@@ -1001,56 +1001,67 @@
         }
 
         .pricing-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 36px;
+            padding-bottom: 28px;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 35px;
+            margin-bottom: 26px;
         }
 
         .pricing-title-group h3 {
-            font-size: 2.2rem;
+            font-size: clamp(1.8rem, 2.5vw, 2.2rem);
             margin-bottom: 8px;
             color: var(--text-main);
+            line-height: 1.2;
         }
 
         .pricing-title-group p {
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1.02rem;
+            line-height: 1.5;
+            max-width: 620px;
         }
 
         .price-badge-box {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            border-radius: 16px;
+            padding: 20px 28px;
             text-align: right;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+            min-width: 320px;
         }
 
         .price-val {
-            font-size: 3.5rem;
+            font-size: 3.4rem;
             font-weight: 800;
             color: var(--accent-green);
             line-height: 1;
             font-family: 'Outfit', sans-serif;
+            margin-bottom: 4px;
         }
 
         .price-val span {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
             font-weight: 400;
         }
 
         .price-sub {
-            font-size: 0.9rem;
+            font-size: 0.86rem;
             color: var(--text-muted);
-            margin-top: 6px;
+            margin-top: 4px;
+            line-height: 1.4;
         }
 
         .pricing-meta-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 35px;
+            gap: 10px;
+            margin-bottom: 24px;
         }
 
         .meta-pill {
@@ -1178,12 +1189,22 @@
         }
 
         @media (max-width: 900px) {
-            .pricing-grid {
+            .pricing-header {
                 grid-template-columns: 1fr;
+                gap: 20px;
+                padding-bottom: 24px;
+                margin-bottom: 24px;
             }
 
             .price-badge-box {
                 text-align: left;
+                min-width: 0;
+                width: 100%;
+                padding: 18px 20px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
             }
 
             .pricing-card {
