@@ -2411,6 +2411,23 @@
         for (var i = 0; i < all_spc.length; i++) {
             all_spc[i].value = "262507242410042-262507242410042";
         }
+
+        // Track Google Ads conversion on form submission
+        var lidarForm = document.getElementById('262507242410042');
+        var submitBtn = document.getElementById('input_2');
+        var conversionSent = false;
+        function recordConversion() {
+            if (!conversionSent && typeof gtag === 'function') {
+                conversionSent = true;
+                gtag('event', 'conversion_event_submit_lead_form');
+            }
+        }
+        if (lidarForm) {
+            lidarForm.addEventListener('submit', recordConversion);
+        }
+        if (submitBtn) {
+            submitBtn.addEventListener('click', recordConversion);
+        }
     </script>
 </body>
 
