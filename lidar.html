@@ -51,6 +51,8 @@
           "@id": "https://densmoredroneservices.com/#organization",
           "name": "Densmore Drone Services",
           "url": "https://densmoredroneservices.com/lidar",
+          "telephone": "+1-281-799-3259",
+          "email": "curtisdensmore@gmail.com",
           "logo": "https://densmoredroneservices.com/favicon.png",
           "image": "https://densmoredroneservices.com/lidar_drone_hero.jpg",
           "description": "Professional aerial LiDAR drone mapping, bare-earth DTM modeling, and CAD topographic contours across Greater Houston, Southeast Texas, and East Texas.",
@@ -1583,6 +1585,280 @@
                 text-align: center;
             }
         }
+
+        /* Contact & Phone UI Elements */
+        .nav-phone-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.35);
+            border-radius: 30px;
+            color: var(--accent-green);
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .nav-phone-btn:hover {
+            background: var(--accent-green);
+            color: #0b0f19;
+            box-shadow: 0 0 16px rgba(0, 255, 136, 0.45);
+            transform: translateY(-1px);
+        }
+
+        .header-mobile-actions {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-mobile-call-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 13px;
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid var(--accent-green);
+            border-radius: 20px;
+            color: var(--accent-green);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .header-mobile-call-btn:hover,
+        .header-mobile-call-btn:active {
+            background: var(--accent-green);
+            color: #0b0f19;
+        }
+
+        @media (max-width: 820px) {
+            .nav-phone-btn {
+                display: none;
+            }
+
+            .header-mobile-actions {
+                display: flex;
+            }
+        }
+
+        .mobile-drawer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .mobile-contact-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-contact-card:hover {
+            border-color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.06);
+        }
+
+        .mobile-contact-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(0, 255, 136, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .mobile-contact-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .mobile-contact-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .mobile-contact-val {
+            font-size: 0.92rem;
+            color: #ffffff;
+            word-break: break-all;
+        }
+
+        /* Direct Contact Card (Quote Section) */
+        .direct-contact-card {
+            margin-top: 28px;
+            padding: 24px;
+            background: rgba(13, 21, 39, 0.8);
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            position: relative;
+        }
+
+        .direct-contact-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 12px;
+            padding: 3px 10px;
+            margin-bottom: 12px;
+        }
+
+        .direct-contact-card h4 {
+            margin: 0 0 6px;
+            font-size: 1.15rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .direct-contact-card p {
+            margin: 0 0 18px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .direct-contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .direct-contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .direct-contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.25s ease;
+            min-width: 0;
+        }
+
+        .direct-contact-btn:hover {
+            border-color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .dc-icon-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(0, 255, 136, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            flex-shrink: 0;
+        }
+
+        .dc-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .dc-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .dc-val {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: color 0.2s;
+        }
+
+        .direct-contact-btn:hover .dc-val {
+            color: var(--accent-green);
+        }
+
+        .direct-contact-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        .direct-contact-note svg {
+            color: var(--accent-green);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Footer contact elements */
+        .footer-contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .footer-contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-contact-link:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-contact-link svg {
+            color: var(--accent-green);
+            flex-shrink: 0;
+        }
     </style>
 </head>
 
@@ -1595,16 +1871,30 @@
             <a href="#services" class="nav-link">Services</a>
             <a href="#coverage" class="nav-link">Coverage</a>
             <a href="#faq" class="nav-link">LiDAR FAQ</a>
+            <a href="tel:2817993259" class="nav-phone-btn" title="Call or Text">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>(281) 799-3259</span>
+            </a>
             <a href="#contact" class="nav-btn header-desktop-btn">Get a Quote</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </button>
+        <div class="header-mobile-actions">
+            <a href="tel:2817993259" class="header-mobile-call-btn" aria-label="Call (281) 799-3259">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>Call</span>
+            </a>
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
     </header>
 
     <div class="mobile-nav-drawer" id="mobileNavDrawer">
@@ -1613,6 +1903,31 @@
         <a href="#coverage" class="nav-link mobile-link">Service Area Map</a>
         <a href="#faq" class="nav-link mobile-link">LiDAR FAQ</a>
         <a href="#contact" class="nav-btn mobile-link">Request a Quote</a>
+        <div class="mobile-drawer-contact">
+            <a href="tel:2817993259" class="mobile-contact-card">
+                <div class="mobile-contact-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                </div>
+                <div class="mobile-contact-info">
+                    <span class="mobile-contact-label">Call or Text</span>
+                    <strong class="mobile-contact-val">(281) 799-3259</strong>
+                </div>
+            </a>
+            <a href="mailto:curtisdensmore@gmail.com?subject=Aerial%20LiDAR%20Project%20Inquiry" class="mobile-contact-card">
+                <div class="mobile-contact-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                </div>
+                <div class="mobile-contact-info">
+                    <span class="mobile-contact-label">Email (.KMZ / Boundaries)</span>
+                    <strong class="mobile-contact-val">curtisdensmore@gmail.com</strong>
+                </div>
+            </a>
+        </div>
     </div>
 
     <section class="hero">
@@ -2201,6 +2516,42 @@
                         <span>Full CAD &amp; GIS Deliverables (.LAS, .DXF, GeoTIFF, PDF)</span>
                     </li>
                 </ul>
+
+                <div class="direct-contact-card">
+                    <div class="direct-contact-badge">Direct Contact &amp; KMZ Dispatch</div>
+                    <h4>Prefer to talk or email project files directly?</h4>
+                    <p>Have an immediate flight deadline or a KMZ / GIS boundary file? Call, text, or email directly for a fast custom proposal.</p>
+                    
+                    <div class="direct-contact-grid">
+                        <a href="tel:2817993259" class="direct-contact-btn">
+                            <div class="dc-icon-circle">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
+                            <div class="dc-text">
+                                <span class="dc-label">Call or Text</span>
+                                <span class="dc-val">(281) 799-3259</span>
+                            </div>
+                        </a>
+                        <a href="mailto:curtisdensmore@gmail.com?subject=Aerial%20LiDAR%20Project%20Inquiry%20-%20Boundary%20Files" class="direct-contact-btn">
+                            <div class="dc-icon-circle">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                </svg>
+                            </div>
+                            <div class="dc-text">
+                                <span class="dc-label">Email Boundary Files</span>
+                                <span class="dc-val">curtisdensmore@gmail.com</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="direct-contact-note">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span>Typical quote turnaround: <strong>2–4 business hours</strong>. Accepts .KMZ, .KML, .DXF, .SHP, or APN/parcel coordinates.</span>
+                    </div>
+                </div>
             </div>
 
             <div class="jotform-card">
@@ -2346,6 +2697,16 @@
                     </svg>
                     <span>FAA Part 107 Certified Commercial Pilot &bull; Insured</span>
                 </div>
+                <div class="footer-contact-items">
+                    <a href="tel:2817993259" class="footer-contact-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <span>(281) 799-3259</span>
+                    </a>
+                    <a href="mailto:curtisdensmore@gmail.com?subject=Aerial%20LiDAR%20Inquiry" class="footer-contact-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                        <span>curtisdensmore@gmail.com</span>
+                    </a>
+                </div>
             </div>
 
             <div class="footer-col">
@@ -2367,13 +2728,14 @@
                     <li><a href="#coverage">Flight Coverage Map</a></li>
                     <li><a href="#faq">Frequently Asked Questions</a></li>
                     <li><a href="#contact">Request Custom Quote</a></li>
+                    <li><a href="tel:2817993259" style="color: var(--accent-green);"><strong style="color:inherit;">Direct:</strong> (281) 799-3259</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
             <div>&copy; 2026 Densmore Drone Services. All rights reserved.</div>
-            <div>Spring, TX &bull; Commercial Aerial LiDAR &bull; densmoredroneservices.com</div>
+            <div>Spring, TX &bull; Commercial Aerial LiDAR &bull; <a href="tel:2817993259" style="color:inherit;text-decoration:none;">(281) 799-3259</a> &bull; <a href="mailto:curtisdensmore@gmail.com" style="color:inherit;text-decoration:none;">curtisdensmore@gmail.com</a></div>
         </div>
     </footer>
 
@@ -2428,6 +2790,30 @@
         if (submitBtn) {
             submitBtn.addEventListener('click', recordConversion);
         }
+
+        // Track direct phone call clicks in Google Analytics
+        document.querySelectorAll('a[href^="tel:"]').forEach(function (telLink) {
+            telLink.addEventListener('click', function () {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'contact_call_click', {
+                        'event_category': 'Direct Contact',
+                        'event_label': telLink.getAttribute('href')
+                    });
+                }
+            });
+        });
+
+        // Track direct email clicks in Google Analytics
+        document.querySelectorAll('a[href^="mailto:"]').forEach(function (mailLink) {
+            mailLink.addEventListener('click', function () {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'contact_email_click', {
+                        'event_category': 'Direct Contact',
+                        'event_label': mailLink.getAttribute('href')
+                    });
+                }
+            });
+        });
     </script>
 </body>
 
