@@ -1,0 +1,46 @@
+# Densmore Drone Services - Automated Negative Keyword List
+# Managed via GitHub Bridge
+# Format: one keyword per line. Use quotes for "phrase" or brackets for [exact], or bare for broad.
+
+# Search Term Leaks Identified in Live Data
+free
+diy
+how to
+tutorial
+skyebrowse
+
+# Consumer / Non-Commercial Drone Queries
+toy drone
+cheap drone
+lost dog
+pet recovery
+deer recovery
+hunting drone
+drone fishing
+
+# Employment & Education
+jobs
+hiring
+salary
+career
+internship
+class
+course
+training
+part 107 test
+study guide
+
+# Photography & Consumer Services
+wedding
+realtor
+real estate photos
+roof inspection
+roof estimate
+
+# Hardware & Sales
+for sale
+used drone
+repair
+rental
+dji store
+matrice 4e
