@@ -34,8 +34,12 @@ study guide
 wedding
 realtor
 real estate photos
-roof inspection
-roof estimate
+
+# Residential Handyman & Insurance Claims (Allows Commercial Roof LiDAR)
+shingle repair
+roof leak
+residential roofer
+hail damage claim
 
 # Hardware & Sales
 for sale

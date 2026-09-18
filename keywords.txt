@@ -2,8 +2,15 @@
 # Managed via GitHub Bridge
 # Format: one keyword per line. Use quotes for "phrase" or brackets for [exact], or bare for broad.
 
+# Core Commercial Surveying & Mapping
 "drone surveying"
 "drone mapping"
 "drone lidar services"
 "aerial survey company"
 "drone topo survey"
+
+# Commercial Roof LiDAR & 3D Modeling
+"lidar roof inspection"
+"drone roof survey"
+"commercial roof drone survey"
+"3d roof modeling drone"
