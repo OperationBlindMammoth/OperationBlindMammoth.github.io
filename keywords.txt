@@ -14,3 +14,17 @@
 "drone roof survey"
 "commercial roof drone survey"
 "3d roof modeling drone"
+
+# High-Resolution Aerial Imaging & 2D Orthomosaics
+"drone aerial imaging"
+"drone orthomosaic mapping"
+"aerial site documentation drone"
+"drone orthomosaic"
+
+# Commercial Radiometric Thermal Inspection
+"drone thermal inspection"
+"commercial drone thermal inspection"
+"thermal roof inspection drone"
+"drone infrared inspection"
+"solar panel drone thermal inspection"
+
