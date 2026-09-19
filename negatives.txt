@@ -8,6 +8,7 @@ diy
 how to
 tutorial
 skyebrowse
+yellowscan
 
 # Consumer / Non-Commercial Drone Queries
 toy drone
@@ -48,3 +49,15 @@ repair
 rental
 dji store
 matrice 4e
+buy
+dealer
+distributor
+reseller
+specs
+specification
+review
+reviews
+manual
+firmware
+unboxing
+
