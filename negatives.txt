@@ -60,4 +60,11 @@ reviews
 manual
 firmware
 unboxing
-
+# Public GIS Data & Free Downloads
+usgs
+tnris
+download
+dataset
+datasets
+open source
+qgis
