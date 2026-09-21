@@ -1,118 +1,39 @@
 /**
- * Densmore Drone Services - Google Ads Analyzer & GitHub Bridge (Combined / Manual)
+ * Densmore Drone Services - Google Ads Data Exporter (Step 1 of 2)
  * 
- * NOTE: For automated daily scheduling, this process is split into two timed scripts:
- * 1. google_ads_export.js -> Scheduled daily at ~5:00 PM (Dumps fresh day metrics to Sheets)
- *    [Antigravity AI audits the sheet at 6:00 PM and updates negatives.txt on GitHub]
- * 2. google_ads_apply.js  -> Scheduled daily at ~7:00 PM (Applies GitHub negatives/keywords live)
+ * SCHEDULE IN GOOGLE ADS: Daily at ~5:00 PM
  * 
- * This file remains available for running all operations at once manually if needed.
+ * PURPOSE:
+ * Exports current day and 30-day performance data, search terms, and active keywords
+ * to the Google Sheets dashboard BEFORE the 6:00 PM Antigravity AI audit.
+ * 
+ * OUTPUT SHEETS:
+ * 1. 'Campaign_Overview' - 30-day summary by campaign
+ * 2. 'Daily_Performance' - Day-by-day impressions, clicks, CPC, cost
+ * 3. 'Search_Terms_Report' - Exact search queries that triggered ads
+ * 4. 'Active_Keywords' - Status and metrics of all bidding keywords
  */
 
 const SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1OvSHBe9QoQ1BSwURiNNgbdwzQ6ATlvG8X3gHCZXBoMk/edit";
-const GITHUB_NEGATIVES_URL = "https://raw.githubusercontent.com/OperationBlindMammoth/OperationBlindMammoth.github.io/main/negatives.txt";
-const GITHUB_KEYWORDS_URL = "https://raw.githubusercontent.com/OperationBlindMammoth/OperationBlindMammoth.github.io/main/keywords.txt";
 
 function main() {
-  Logger.log("Starting Densmore Drone Services Full Automation Sync...");
+  Logger.log(">>> [5:00 PM] Starting Densmore Drone Services Data Export...");
   
   const spreadsheet = SpreadsheetApp.openByUrl(SPREADSHEET_URL);
 
-  // 1. Sync Negative Keywords from GitHub
-  syncNegativeKeywordsFromGitHub(spreadsheet);
-
-  // 2. Sync Positive Target Keywords from GitHub into General LiDAR
-  syncPositiveKeywordsFromGitHub(spreadsheet);
-
-  // 3. Export 30-Day Campaign Performance Overview
+  // 1. Export 30-Day Campaign Performance Overview
   exportCampaignPerformance(spreadsheet);
 
-  // 4. Export Day-by-Day Performance
+  // 2. Export Day-by-Day Performance (includes today's latest data)
   exportDailyPerformance(spreadsheet);
 
-  // 5. Export Search Terms Report
+  // 3. Export Search Terms Report (identifies leaks & winning search queries)
   exportSearchTerms(spreadsheet);
 
-  // 6. Export Active Keywords Report
+  // 4. Export Active Keywords Report
   exportKeywords(spreadsheet);
 
-  Logger.log(">>> Full Sync finished successfully! Dashboard: " + spreadsheet.getUrl());
-}
-
-function syncPositiveKeywordsFromGitHub(ss) {
-  let sheet = ss.getSheetByName("Keywords_Added_Active") || ss.insertSheet("Keywords_Added_Active");
-  sheet.clear();
-  sheet.appendRow(["Target Keyword", "Ad Group", "Status", "Date Applied"]);
-  sheet.getRange(1, 1, 1, 4).setFontWeight("bold").setBackground("#d9ead3");
-
-  try {
-    const response = UrlFetchApp.fetch(GITHUB_KEYWORDS_URL);
-    const rawText = response.getContentText();
-    const lines = rawText.split("\n");
-
-    const adGroups = AdsApp.adGroups().withCondition("Name = 'General LiDAR'").get();
-    if (!adGroups.hasNext()) {
-      Logger.log("Ad group 'General LiDAR' not found.");
-      return;
-    }
-    const generalLidarAdGroup = adGroups.next();
-
-    let count = 0;
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      if (!line || line.startsWith("#")) continue;
-
-      try {
-        generalLidarAdGroup.newKeywordBuilder().withText(line).build();
-        sheet.appendRow([line, "General LiDAR", "Successfully Added", new Date().toLocaleDateString()]);
-        count++;
-      } catch (err) {
-        // Keyword likely already exists
-        sheet.appendRow([line, "General LiDAR", "Already Present", new Date().toLocaleDateString()]);
-      }
-    }
-    Logger.log(">>> Successfully processed " + count + " target keywords from GitHub into General LiDAR!");
-  } catch (err) {
-    Logger.log("Error syncing target keywords from GitHub: " + err);
-  }
-}
-
-function syncNegativeKeywordsFromGitHub(ss) {
-  let sheet = ss.getSheetByName("Negative_Keywords_Active") || ss.insertSheet("Negative_Keywords_Active");
-  sheet.clear();
-  sheet.appendRow(["Active Negative Keyword", "Source", "Last Synced"]);
-  sheet.getRange(1, 1, 1, 3).setFontWeight("bold").setBackground("#fce8e6");
-
-  try {
-    const response = UrlFetchApp.fetch(GITHUB_NEGATIVES_URL);
-    const rawText = response.getContentText();
-    const lines = rawText.split("\n");
-
-    const campaigns = AdsApp.campaigns().withCondition("Status = ENABLED").get();
-    const activeCampaigns = [];
-    while (campaigns.hasNext()) {
-      activeCampaigns.push(campaigns.next());
-    }
-
-    let count = 0;
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      if (!line || line.startsWith("#")) continue;
-
-      for (let c = 0; c < activeCampaigns.length; c++) {
-        try {
-          activeCampaigns[c].createNegativeKeyword(line);
-        } catch (e) {
-          // Ignore if already added
-        }
-      }
-      sheet.appendRow([line, "GitHub (negatives.txt)", new Date().toLocaleDateString()]);
-      count++;
-    }
-    Logger.log(">>> Successfully synced " + count + " negative keywords from GitHub!");
-  } catch (err) {
-    Logger.log("Error syncing negatives from GitHub: " + err);
-  }
+  Logger.log(">>> [5:00 PM] Export complete! Dashboard updated: " + spreadsheet.getUrl());
 }
 
 function exportCampaignPerformance(ss) {
