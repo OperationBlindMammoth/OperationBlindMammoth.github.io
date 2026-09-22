@@ -18,6 +18,11 @@ pet recovery
 deer recovery
 hunting drone
 drone fishing
+"drone sprayer irrigation"
+"irrigation drone sprayer"
+"crop sprayer drone"
+"drone crop spraying"
+"irrigation sprayer drone"
 
 # Employment & Education
 jobs
@@ -77,3 +82,4 @@ navigator price
 "lidar capable"
 "lidar north america"
 lidar america
+[lidar map]
