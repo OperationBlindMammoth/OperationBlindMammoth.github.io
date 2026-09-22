@@ -24,6 +24,25 @@ drone fishing
 "drone crop spraying"
 "irrigation sprayer drone"
 
+# Custom Chemical & Drone Spraying Services (We map & prescribe; we do not spray)
+"drone spraying service"
+"drone spray service"
+"custom applicator"
+"custom spraying"
+"pesticide application"
+"herbicide spraying"
+"aerial application service"
+"hire spray drone"
+"crop dusting service"
+"crop duster drone"
+"spray contractor"
+"chemical application"
+"aerial spraying"
+"crop duster for hire"
+"drone crop dusting"
+"agricultural spraying service"
+"hire drone sprayer"
+
 # Employment & Education
 jobs
 hiring

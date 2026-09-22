@@ -29,3 +29,16 @@
 "drone infrared inspection"
 "solar panel drone thermal inspection"
 
+# Precision Agriculture & Multispectral Prescription Mapping
+"multispectral drone mapping"
+"multispectral crop mapping"
+"ndvi drone mapping"
+"ndvi crop health mapping"
+"variable rate prescription drone"
+"drone spot spray map"
+"dji agras prescription mapping"
+"precision agriculture drone mapping"
+"drone prescription map"
+"crop health drone survey"
+
+
