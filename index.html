@@ -129,9 +129,9 @@
 
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1rem;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -163,7 +163,7 @@
             margin: 0 4px;
         }
 
-        .nav-phone-btn {
+        .nav-phone-btn, .nav-email-btn {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -178,7 +178,7 @@
             transition: all 0.2s;
             white-space: nowrap;
         }
-        .nav-phone-btn:hover { background: rgba(0,255,136,0.18); }
+        .nav-phone-btn:hover, .nav-email-btn:hover { background: rgba(0,255,136,0.18); }
 
         .nav-btn {
             padding: 8px 20px;
@@ -752,7 +752,7 @@
 
 <!-- ── HEADER ── -->
 <header>
-    <a href="/" class="logo">DDS</a>
+    <a href="/" class="logo">Densmore Drone Services</a>
     <nav class="nav-links">
         <a href="/lidar" class="nav-link">LiDAR</a>
         <a href="/thermal" class="nav-link">Thermal</a>
@@ -764,6 +764,10 @@
         <a href="tel:2817993259" class="nav-phone-btn" title="Call or Text">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.09a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
             (281) 799-3259
+        </a>
+        <a href="mailto:curtis@densmoredroneservices.com" class="nav-email-btn" title="Email us">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Email
         </a>
         <a href="#contact" class="nav-btn">Get a Quote</a>
     </nav>
@@ -780,17 +784,18 @@
     <a href="/multispectral" class="nav-link">Multispectral / Ag</a>
     <a href="/video" class="nav-link">Videography</a>
     <a href="tel:2817993259" class="nav-link" style="color:var(--accent-green);">(281) 799-3259</a>
+    <a href="mailto:curtis@densmoredroneservices.com" class="nav-link" style="color:var(--accent-green);">curtis@densmoredroneservices.com</a>
     <a href="#contact" class="nav-btn">Get a Quote</a>
 </div>
 
 <!-- ── HERO ── -->
 <section class="hero">
-    <img src="drone_hero_image.png" alt="Commercial drone services Greater Houston and Southeast Texas" class="hero-bg" fetchpriority="high">
+    <img src="lidar_drone_hero.jpg" alt="Commercial drone services Greater Houston and Southeast Texas" class="hero-bg" fetchpriority="high">
     <div class="hero-overlay"></div>
     <div class="hero-container">
         <div class="badge">FAA Part 107 Certified &bull; Greater Houston &amp; SE Texas</div>
-        <h1>Survey-Grade <span class="accent-lidar">Aerial LiDAR</span> &amp; <span class="accent-thermal">Thermal Inspection</span> Services</h1>
-        <p class="hero-sub">Enterprise drone services for engineering, construction, energy, agriculture, and commercial real estate. DJI Zenmuse L3 payload. Same-week scheduling.</p>
+        <h1>Professional Commercial <span class="accent-lidar">Drone Services</span></h1>
+        <p class="hero-sub">Specialized aerial data, imaging, and inspection across six service lines — from survey-grade LiDAR to cinematic video. Same-week scheduling. Deliverable-ready results.</p>
         <div class="cta-group">
             <a href="#contact" class="btn-primary">Get a Free Quote</a>
             <a href="#services" class="btn-secondary">Explore Services</a>
