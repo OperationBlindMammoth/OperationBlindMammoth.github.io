@@ -41,4 +41,16 @@
 "drone prescription map"
 "crop health drone survey"
 
-
+# Commercial Construction & Earthwork Development
+"drone cut and fill analysis"
+"stockpile volume measurement drone"
+"drone earthwork survey"
+"drone topographic survey construction"
+"pre construction drone survey"
+"site development drone mapping"
+"construction progress drone documentation"
+"construction site drone monitoring"
+"houston construction drone survey"
+"as built drone survey"
+"drone surveying for civil engineering"
+"commercial site topo survey drone"
