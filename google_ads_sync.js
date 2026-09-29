@@ -39,42 +39,197 @@ function main() {
   Logger.log(">>> Full Sync finished successfully! Dashboard: " + spreadsheet.getUrl());
 }
 
+const AD_GROUP_CONFIGS = {
+  "General LiDAR": {
+    cpc: 3.50,
+    url: "https://densmoredroneservices.com/lidar",
+    headlines: [
+      "Aerial LiDAR Drone Surveys",
+      "Densmore Drone Services",
+      "Greater Houston & SE Texas",
+      "Survey-Grade LiDAR Mapping",
+      "FAA Part 107 Certified",
+      "Same-Week Scheduling",
+      "Topographic Contour Models"
+    ],
+    descriptions: [
+      "Survey-grade aerial LiDAR & topographic mapping across Greater Houston and SE Texas.",
+      "Same-week flight scheduling. Fast turnaround deliverables ready for your CAD/GIS."
+    ]
+  },
+  "Construction Earthwork": {
+    cpc: 3.00,
+    url: "https://densmoredroneservices.com/photogrammetry",
+    headlines: [
+      "Drone Cut & Fill Analysis",
+      "Stockpile Volume Measurement",
+      "Construction Drone Surveys",
+      "Houston Earthwork Drone Topo",
+      "Pre-Construction Site Maps",
+      "Densmore Drone Services",
+      "FAA Part 107 Certified"
+    ],
+    descriptions: [
+      "High-accuracy topographic surveys & earthwork volumetrics for Texas construction projects.",
+      "Accurate cut and fill reports, surface models, and 3D terrain data. Fast turnarounds."
+    ]
+  },
+  "Thermal Inspection": {
+    cpc: 3.00,
+    url: "https://densmoredroneservices.com/thermal",
+    headlines: [
+      "Drone Thermal Roof Inspection",
+      "Commercial Aerial Thermography",
+      "Detect Roof Moisture & Leaks",
+      "Solar Panel Thermal Drone",
+      "Radiometric FLIR Drone Scans",
+      "Houston Thermal Drone Scans",
+      "FAA Part 107 Certified"
+    ],
+    descriptions: [
+      "Radiometric thermal imaging to detect roof moisture, heat loss, and electrical faults.",
+      "Survey-grade aerial infrared imaging across Greater Houston & SE Texas. Request a quote."
+    ]
+  },
+  "Multispectral Ag": {
+    cpc: 2.50,
+    url: "https://densmoredroneservices.com/multispectral",
+    headlines: [
+      "NDVI Multispectral Drone Maps",
+      "Precision Crop Health Mapping",
+      "Drone Prescription Maps",
+      "Variable Rate Agras Maps",
+      "Save ~20% on Spray Chemicals",
+      "Houston & Texas Ag Drones",
+      "FAA Part 107 Certified"
+    ],
+    descriptions: [
+      "Precision crop health analytics and variable rate prescription maps for spray drones.",
+      "Accurate NDVI vegetation index mapping for Texas growers and custom spray operators."
+    ]
+  }
+};
+
 function syncPositiveKeywordsFromGitHub(ss) {
-  let sheet = ss.getSheetByName("Keywords_Added_Active") || ss.insertSheet("Keywords_Added_Active");
-  sheet.clear();
-  sheet.appendRow(["Target Keyword", "Ad Group", "Status", "Date Applied"]);
-  sheet.getRange(1, 1, 1, 4).setFontWeight("bold").setBackground("#d9ead3");
+  let sheet = null;
+  if (ss) {
+    sheet = ss.getSheetByName("Keywords_Added_Active") || ss.insertSheet("Keywords_Added_Active");
+    sheet.clear();
+    sheet.appendRow(["Target Keyword", "Ad Group", "Status", "Date Applied"]);
+    sheet.getRange(1, 1, 1, 4).setFontWeight("bold").setBackground("#d9ead3");
+  }
 
   try {
-    const response = UrlFetchApp.fetch(GITHUB_KEYWORDS_URL);
+    const response = UrlFetchApp.fetch(GITHUB_KEYWORDS_URL, { muteHttpExceptions: true });
+    if (response.getResponseCode() !== 200) {
+      Logger.log("Error fetching keywords.txt from GitHub: HTTP " + response.getResponseCode());
+      return;
+    }
     const rawText = response.getContentText();
     const lines = rawText.split("\n");
 
-    const adGroups = AdsApp.adGroups().withCondition("Name = 'General LiDAR'").get();
-    if (!adGroups.hasNext()) {
-      Logger.log("Ad group 'General LiDAR' not found.");
-      return;
-    }
-    const generalLidarAdGroup = adGroups.next();
-
-    let count = 0;
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      if (!line || line.startsWith("#")) continue;
-
-      try {
-        generalLidarAdGroup.newKeywordBuilder().withText(line).build();
-        sheet.appendRow([line, "General LiDAR", "Successfully Added", new Date().toLocaleDateString()]);
-        count++;
-      } catch (err) {
-        // Keyword likely already exists
-        sheet.appendRow([line, "General LiDAR", "Already Present", new Date().toLocaleDateString()]);
+    let targetCampaign = null;
+    const campaigns = AdsApp.campaigns().withCondition("Status = ENABLED").get();
+    while (campaigns.hasNext()) {
+      const camp = campaigns.next();
+      if (camp.getName().toLowerCase().includes("lidar") || camp.getName().toLowerCase().includes("search")) {
+        targetCampaign = camp;
+        break;
       }
     }
-    Logger.log(">>> Successfully processed " + count + " target keywords from GitHub into General LiDAR!");
+    if (!targetCampaign) {
+      const fallback = AdsApp.campaigns().withCondition("Status = ENABLED").get();
+      if (fallback.hasNext()) targetCampaign = fallback.next();
+    }
+
+    if (!targetCampaign) {
+      Logger.log("No enabled campaign found to sync target keywords.");
+      return;
+    }
+
+    // Auto-align daily budget to $30.00/day during promotional credit window
+    try {
+      const budget = targetCampaign.getBudget();
+      if (budget && budget.getAmount() < 30.00) {
+        Logger.log(">>> Updating campaign budget for " + targetCampaign.getName() + " from $" + budget.getAmount() + " to $30.00/day for promo pacing.");
+        budget.setAmount(30.00);
+      }
+    } catch (bErr) {
+      Logger.log("Notice on budget adjustment: " + bErr);
+    }
+
+    let currentAdGroupName = "General LiDAR";
+    let count = 0;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+
+      if (line.startsWith("# AD_GROUP:")) {
+        currentAdGroupName = line.replace("# AD_GROUP:", "").trim();
+        continue;
+      }
+      if (line.startsWith("#")) continue;
+
+      const adGroup = getOrCreateAdGroup(targetCampaign, currentAdGroupName, AD_GROUP_CONFIGS[currentAdGroupName]);
+      if (!adGroup) continue;
+
+      try {
+        adGroup.newKeywordBuilder().withText(line).build();
+        if (sheet) {
+          sheet.appendRow([line, currentAdGroupName, "Successfully Added", new Date().toLocaleDateString()]);
+        }
+        count++;
+      } catch (err) {
+        if (sheet) {
+          sheet.appendRow([line, currentAdGroupName, "Already Present", new Date().toLocaleDateString()]);
+        }
+      }
+    }
+    Logger.log(">>> Successfully processed " + count + " target keywords into " + targetCampaign.getName() + " across ad groups!");
   } catch (err) {
     Logger.log("Error syncing target keywords from GitHub: " + err);
   }
+}
+
+function getOrCreateAdGroup(campaign, adGroupName, config) {
+  const agIterator = campaign.adGroups().withCondition("Name = '" + adGroupName + "'").get();
+  if (agIterator.hasNext()) {
+    return agIterator.next();
+  }
+
+  Logger.log(">>> Creating new Ad Group: " + adGroupName);
+  const cpc = (config && config.cpc) ? config.cpc : 3.00;
+  try {
+    const builder = campaign.newAdGroupBuilder().withName(adGroupName).withCpc(cpc);
+    const operation = builder.build();
+    let newAdGroup = null;
+    if (typeof operation.getResult === "function") {
+      newAdGroup = operation.getResult();
+    } else {
+      newAdGroup = operation;
+    }
+
+    if (newAdGroup && config && config.url) {
+      try {
+        const adsIterator = newAdGroup.ads().withCondition("Type = RESPONSIVE_SEARCH_AD").withCondition("Status = ENABLED").get();
+        if (!adsIterator.hasNext()) {
+          newAdGroup.newAd().responsiveSearchAdBuilder()
+            .withFinalUrl(config.url)
+            .withHeadlines(config.headlines)
+            .withDescriptions(config.descriptions)
+            .build();
+          Logger.log(">>> Created dedicated RSA ad for " + adGroupName + " pointing to " + config.url);
+        }
+      } catch (adErr) {
+        Logger.log("Notice creating starter RSA for " + adGroupName + ": " + adErr);
+      }
+    }
+    return newAdGroup;
+  } catch (e) {
+    Logger.log("Error creating ad group " + adGroupName + ": " + e);
+  }
+  return null;
 }
 
 function syncNegativeKeywordsFromGitHub(ss) {

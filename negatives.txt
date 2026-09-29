@@ -12,12 +12,28 @@ yellowscan
 
 # Consumer / Non-Commercial Drone Queries
 toy drone
+toy drones
+kids drone
 cheap drone
 lost dog
 pet recovery
 deer recovery
 hunting drone
 drone fishing
+drone racing
+fpv
+drone simulator
+mini 4 pro
+air 3
+avata
+mavic 3 classic
+stock photos
+stock video
+stock footage
+wallpaper
+spy drone
+surveillance
+drone jammer
 "drone sprayer irrigation"
 "irrigation drone sprayer"
 "crop sprayer drone"
