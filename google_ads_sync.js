@@ -99,7 +99,7 @@ const AD_GROUP_CONFIGS = {
       "Precision Crop Health Mapping",
       "Drone Prescription Maps",
       "Variable Rate Agras Maps",
-      "Save ~20% on Spray Chemicals",
+      "Reduce Spray Input Costs",
       "Houston & Texas Ag Drones",
       "FAA Part 107 Certified"
     ],
@@ -247,6 +247,25 @@ function syncNegativeKeywordsFromGitHub(ss) {
     const activeCampaigns = [];
     while (campaigns.hasNext()) {
       activeCampaigns.push(campaigns.next());
+    }
+
+    // Automatically remove obsolete/conflicting broad negatives that trigger Google Ads alert banners
+    const broadNegativesToPurge = ["roof inspection", "roof estimate", "irrigation drone"];
+    for (let c = 0; c < activeCampaigns.length; c++) {
+      try {
+        const existingNegs = activeCampaigns[c].negativeKeywords().get();
+        while (existingNegs.hasNext()) {
+          const neg = existingNegs.next();
+          const text = neg.getText().toLowerCase().trim();
+          const matchType = neg.getMatchType();
+          if (broadNegativesToPurge.includes(text) && matchType === "BROAD") {
+            Logger.log(">>> Purging conflicting broad negative: " + text + " from " + activeCampaigns[c].getName());
+            neg.remove();
+          }
+        }
+      } catch (purgeErr) {
+        Logger.log("Notice during negative purge: " + purgeErr);
+      }
     }
 
     let count = 0;
