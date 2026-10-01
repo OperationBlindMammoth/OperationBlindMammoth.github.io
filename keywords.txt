@@ -23,6 +23,8 @@
 "drone orthomosaic mapping"
 "aerial site documentation drone"
 "drone orthomosaic"
+"lidar gis mapping"
+"infrastructure inspection drone"
 
 # ========================================================
 # AD_GROUP: Construction Earthwork
