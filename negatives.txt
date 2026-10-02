@@ -20,6 +20,8 @@ pet recovery
 deer recovery
 hunting drone
 drone fishing
+sonar
+underwater
 drone racing
 fpv
 drone simulator
