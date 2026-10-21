@@ -36,12 +36,15 @@ function main() {
   // 6. Export Active Keywords Report
   exportKeywords(spreadsheet);
 
+  // 7. Export Promo Credit Pacing Tracker
+  exportPromoTracker(spreadsheet);
+
   Logger.log(">>> Full Sync finished successfully! Dashboard: " + spreadsheet.getUrl());
 }
 
 const AD_GROUP_CONFIGS = {
   "General LiDAR": {
-    cpc: 3.50,
+    cpc: 4.75,
     url: "https://densmoredroneservices.com/lidar",
     headlines: [
       "Aerial LiDAR Drone Surveys",
@@ -58,7 +61,7 @@ const AD_GROUP_CONFIGS = {
     ]
   },
   "Construction Earthwork": {
-    cpc: 3.00,
+    cpc: 4.50,
     url: "https://densmoredroneservices.com/photogrammetry",
     headlines: [
       "Drone Cut & Fill Analysis",
@@ -75,7 +78,7 @@ const AD_GROUP_CONFIGS = {
     ]
   },
   "Thermal Inspection": {
-    cpc: 3.00,
+    cpc: 4.25,
     url: "https://densmoredroneservices.com/thermal",
     headlines: [
       "Drone Thermal Roof Inspection",
@@ -92,7 +95,7 @@ const AD_GROUP_CONFIGS = {
     ]
   },
   "Multispectral Ag": {
-    cpc: 2.50,
+    cpc: 3.75,
     url: "https://densmoredroneservices.com/multispectral",
     headlines: [
       "NDVI Multispectral Drone Maps",
@@ -147,12 +150,12 @@ function syncPositiveKeywordsFromGitHub(ss) {
       return;
     }
 
-    // Auto-align daily budget to $30.00/day during promotional credit window
+    // Auto-align daily budget to $35.00/day during promotional credit window to ensure auction headroom
     try {
       const budget = targetCampaign.getBudget();
-      if (budget && budget.getAmount() < 30.00) {
-        Logger.log(">>> Updating campaign budget for " + targetCampaign.getName() + " from $" + budget.getAmount() + " to $30.00/day for promo pacing.");
-        budget.setAmount(30.00);
+      if (budget && budget.getAmount() < 35.00) {
+        Logger.log(">>> Updating campaign budget for " + targetCampaign.getName() + " from $" + budget.getAmount() + " to $35.00/day for promo pacing.");
+        budget.setAmount(35.00);
       }
     } catch (bErr) {
       Logger.log("Notice on budget adjustment: " + bErr);
@@ -160,6 +163,7 @@ function syncPositiveKeywordsFromGitHub(ss) {
 
     let currentAdGroupName = "General LiDAR";
     let count = 0;
+    const touchedAdGroups = new Set();
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
@@ -171,11 +175,19 @@ function syncPositiveKeywordsFromGitHub(ss) {
       }
       if (line.startsWith("#")) continue;
 
-      const adGroup = getOrCreateAdGroup(targetCampaign, currentAdGroupName, AD_GROUP_CONFIGS[currentAdGroupName]);
+      const adGroupConfig = AD_GROUP_CONFIGS[currentAdGroupName] || { cpc: 4.00 };
+      const adGroup = getOrCreateAdGroup(targetCampaign, currentAdGroupName, adGroupConfig);
       if (!adGroup) continue;
 
+      touchedAdGroups.add(currentAdGroupName);
+
       try {
-        adGroup.newKeywordBuilder().withText(line).build();
+        const kwBuilder = adGroup.newKeywordBuilder().withText(line);
+        if (adGroupConfig.cpc) {
+          kwBuilder.withCpc(adGroupConfig.cpc);
+        }
+        kwBuilder.build();
+
         if (sheet) {
           sheet.appendRow([line, currentAdGroupName, "Successfully Added", new Date().toLocaleDateString()]);
         }
@@ -186,20 +198,65 @@ function syncPositiveKeywordsFromGitHub(ss) {
         }
       }
     }
+
+    // Align all existing keyword bids across touched ad groups to the target CPC
+    for (const agName of touchedAdGroups) {
+      const agConfig = AD_GROUP_CONFIGS[agName];
+      if (agConfig && agConfig.cpc) {
+        alignKeywordBids(targetCampaign, agName, agConfig.cpc);
+      }
+    }
+
     Logger.log(">>> Successfully processed " + count + " target keywords into " + targetCampaign.getName() + " across ad groups!");
   } catch (err) {
     Logger.log("Error syncing target keywords from GitHub: " + err);
   }
 }
 
+function alignKeywordBids(campaign, adGroupName, targetCpc) {
+  try {
+    const agIter = campaign.adGroups().withCondition("Name = '" + adGroupName + "'").get();
+    if (!agIter.hasNext()) return;
+    const adGroup = agIter.next();
+
+    try {
+      adGroup.bidding().setCpc(targetCpc);
+    } catch (e) {
+      // Ignored if automated bidding
+    }
+
+    const kwIter = adGroup.keywords().withCondition("Status = ENABLED").get();
+    let updated = 0;
+    while (kwIter.hasNext()) {
+      const kw = kwIter.next();
+      const currentBid = kw.bidding().getCpc();
+      if (!currentBid || currentBid < targetCpc) {
+        kw.bidding().setCpc(targetCpc);
+        updated++;
+      }
+    }
+    if (updated > 0) {
+      Logger.log(">>> Raised bid on " + updated + " keywords in '" + adGroupName + "' to $" + targetCpc.toFixed(2));
+    }
+  } catch (err) {
+    Logger.log("Notice aligning keyword bids in " + adGroupName + ": " + err);
+  }
+}
+
 function getOrCreateAdGroup(campaign, adGroupName, config) {
+  const cpc = (config && config.cpc) ? config.cpc : 4.00;
   const agIterator = campaign.adGroups().withCondition("Name = '" + adGroupName + "'").get();
   if (agIterator.hasNext()) {
-    return agIterator.next();
+    const existingAg = agIterator.next();
+    try {
+      existingAg.bidding().setCpc(cpc);
+    } catch (e) {
+      // Ignore if automated bidding
+    }
+    return existingAg;
   }
 
   Logger.log(">>> Creating new Ad Group: " + adGroupName);
-  const cpc = (config && config.cpc) ? config.cpc : 3.00;
   try {
     const builder = campaign.newAdGroupBuilder().withName(adGroupName).withCpc(cpc);
     const operation = builder.build();
@@ -394,3 +451,58 @@ function exportKeywords(ss) {
     ]);
   }
 }
+
+function exportPromoTracker(ss) {
+  let sheet = ss.getSheetByName("Promo_Pacing_Tracker") || ss.insertSheet("Promo_Pacing_Tracker");
+  sheet.clear();
+
+  const PROMO_GOAL = 500.00;
+  // Expiration deadline: Nov 27, 2026
+  const PROMO_EXPIRY_DATE = new Date(2026, 10, 27, 23, 59, 59);
+  const TODAY = new Date();
+
+  // Query cumulative spend across all active and paused campaigns in the promo window
+  const query = `
+    SELECT campaign.name, metrics.cost_micros
+    FROM campaign
+    WHERE segments.date DURING LAST_60_DAYS AND campaign.status != 'REMOVED'
+  `;
+
+  let totalSpentMicros = 0;
+  const rows = AdsApp.search(query);
+  while (rows.hasNext()) {
+    const row = rows.next();
+    totalSpentMicros += row.metrics.costMicros;
+  }
+
+  const totalSpent = totalSpentMicros / 1000000;
+  const remainingSpend = Math.max(0, PROMO_GOAL - totalSpent);
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const daysLeft = Math.max(1, Math.ceil((PROMO_EXPIRY_DATE.getTime() - TODAY.getTime()) / msPerDay));
+  const requiredDailyRunRate = remainingSpend / daysLeft;
+
+  sheet.appendRow(["Metric", "Value", "Notes"]);
+  sheet.getRange(1, 1, 1, 3).setFontWeight("bold").setBackground("#cfe2ff");
+
+  sheet.appendRow(["Promo Credit Goal", "$" + PROMO_GOAL.toFixed(2), "Target spend to claim $500 free match"]);
+  sheet.appendRow(["Total Spend to Date", "$" + totalSpent.toFixed(2), "Cumulative account spend"]);
+  sheet.appendRow(["Remaining Spend Needed", "$" + remainingSpend.toFixed(2), "Spend required before cutoff"]);
+  sheet.appendRow(["Expiration Deadline", "November 27, 2026", "Promo credit expiration"]);
+  sheet.appendRow(["Calendar Days Remaining", daysLeft.toString(), "Days left until deadline"]);
+  sheet.appendRow(["Target Daily Run-Rate", "$" + requiredDailyRunRate.toFixed(2) + " / day", "Required average daily spend to hit $500"]);
+
+  let status = "ON TRACK";
+  if (totalSpent >= PROMO_GOAL) {
+    status = "GOAL REACHED - $500 CREDIT CLAIMED";
+  } else if (requiredDailyRunRate > 25) {
+    status = "URGENT - ACCELERATE SPEND (RAISE BIDS / EXPAND KEYWORDS)";
+  } else if (requiredDailyRunRate > 15) {
+    status = "MODERATE ATTENTION - KEEP BIDS COMPETITIVE";
+  } else {
+    status = "PACING ON TRACK ($12-$15/DAY TARGET)";
+  }
+
+  sheet.appendRow(["Pacing Status", status, "Updated automatically on every sync"]);
+  sheet.getRange(8, 1, 1, 3).setFontWeight("bold").setBackground(totalSpent >= PROMO_GOAL ? "#d9ead3" : "#fff2cc");
+}
+

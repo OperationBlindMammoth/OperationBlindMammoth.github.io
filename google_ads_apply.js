@@ -23,7 +23,7 @@ const GITHUB_KEYWORDS_URL = "https://raw.githubusercontent.com/OperationBlindMam
 
 const AD_GROUP_CONFIGS = {
   "General LiDAR": {
-    cpc: 3.50,
+    cpc: 4.75,
     url: "https://densmoredroneservices.com/lidar",
     headlines: [
       "Aerial LiDAR Drone Surveys",
@@ -40,7 +40,7 @@ const AD_GROUP_CONFIGS = {
     ]
   },
   "Construction Earthwork": {
-    cpc: 3.00,
+    cpc: 4.50,
     url: "https://densmoredroneservices.com/photogrammetry",
     headlines: [
       "Drone Cut & Fill Analysis",
@@ -57,7 +57,7 @@ const AD_GROUP_CONFIGS = {
     ]
   },
   "Thermal Inspection": {
-    cpc: 3.00,
+    cpc: 4.25,
     url: "https://densmoredroneservices.com/thermal",
     headlines: [
       "Drone Thermal Roof Inspection",
@@ -74,7 +74,7 @@ const AD_GROUP_CONFIGS = {
     ]
   },
   "Multispectral Ag": {
-    cpc: 2.50,
+    cpc: 3.75,
     url: "https://densmoredroneservices.com/multispectral",
     headlines: [
       "NDVI Multispectral Drone Maps",
@@ -215,12 +215,12 @@ function syncPositiveKeywordsFromGitHub(ss) {
       return;
     }
 
-    // Auto-align daily budget to $30.00/day during promotional credit window
+    // Auto-align daily budget to $35.00/day during promotional credit window to ensure auction headroom
     try {
       const budget = targetCampaign.getBudget();
-      if (budget && budget.getAmount() < 30.00) {
-        Logger.log(">>> Updating campaign budget for " + targetCampaign.getName() + " from $" + budget.getAmount() + " to $30.00/day for promo pacing.");
-        budget.setAmount(30.00);
+      if (budget && budget.getAmount() < 35.00) {
+        Logger.log(">>> Updating campaign budget for " + targetCampaign.getName() + " from $" + budget.getAmount() + " to $35.00/day for promo pacing.");
+        budget.setAmount(35.00);
       }
     } catch (bErr) {
       Logger.log("Notice on budget adjustment: " + bErr);
@@ -228,6 +228,7 @@ function syncPositiveKeywordsFromGitHub(ss) {
 
     let currentAdGroupName = "General LiDAR";
     let count = 0;
+    const touchedAdGroups = new Set();
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
@@ -239,11 +240,19 @@ function syncPositiveKeywordsFromGitHub(ss) {
       }
       if (line.startsWith("#")) continue;
 
-      const adGroup = getOrCreateAdGroup(targetCampaign, currentAdGroupName, AD_GROUP_CONFIGS[currentAdGroupName]);
+      const adGroupConfig = AD_GROUP_CONFIGS[currentAdGroupName] || { cpc: 4.00 };
+      const adGroup = getOrCreateAdGroup(targetCampaign, currentAdGroupName, adGroupConfig);
       if (!adGroup) continue;
 
+      touchedAdGroups.add(currentAdGroupName);
+
       try {
-        adGroup.newKeywordBuilder().withText(line).build();
+        const kwBuilder = adGroup.newKeywordBuilder().withText(line);
+        if (adGroupConfig.cpc) {
+          kwBuilder.withCpc(adGroupConfig.cpc);
+        }
+        kwBuilder.build();
+
         if (sheet) {
           sheet.appendRow([line, currentAdGroupName, "Successfully Added", new Date().toLocaleDateString()]);
         }
@@ -254,20 +263,67 @@ function syncPositiveKeywordsFromGitHub(ss) {
         }
       }
     }
+
+    // Align all existing keyword bids across touched ad groups to the target CPC
+    for (const agName of touchedAdGroups) {
+      const agConfig = AD_GROUP_CONFIGS[agName];
+      if (agConfig && agConfig.cpc) {
+        alignKeywordBids(targetCampaign, agName, agConfig.cpc);
+      }
+    }
+
     Logger.log(">>> Successfully processed " + count + " target keywords into " + targetCampaign.getName() + " across ad groups!");
   } catch (err) {
     Logger.log("Error syncing target keywords from GitHub: " + err);
   }
 }
 
+function alignKeywordBids(campaign, adGroupName, targetCpc) {
+  try {
+    const agIter = campaign.adGroups().withCondition("Name = '" + adGroupName + "'").get();
+    if (!agIter.hasNext()) return;
+    const adGroup = agIter.next();
+
+    // Ensure ad group default CPC is set
+    try {
+      adGroup.bidding().setCpc(targetCpc);
+    } catch (e) {
+      // Ignored if handled by automated bidding
+    }
+
+    // Update keyword-level bids if below target
+    const kwIter = adGroup.keywords().withCondition("Status = ENABLED").get();
+    let updated = 0;
+    while (kwIter.hasNext()) {
+      const kw = kwIter.next();
+      const currentBid = kw.bidding().getCpc();
+      if (!currentBid || currentBid < targetCpc) {
+        kw.bidding().setCpc(targetCpc);
+        updated++;
+      }
+    }
+    if (updated > 0) {
+      Logger.log(">>> Raised bid on " + updated + " keywords in '" + adGroupName + "' to $" + targetCpc.toFixed(2));
+    }
+  } catch (err) {
+    Logger.log("Notice aligning keyword bids in " + adGroupName + ": " + err);
+  }
+}
+
 function getOrCreateAdGroup(campaign, adGroupName, config) {
+  const cpc = (config && config.cpc) ? config.cpc : 4.00;
   const agIterator = campaign.adGroups().withCondition("Name = '" + adGroupName + "'").get();
   if (agIterator.hasNext()) {
-    return agIterator.next();
+    const existingAg = agIterator.next();
+    try {
+      existingAg.bidding().setCpc(cpc);
+    } catch (e) {
+      // Ignore if automated bidding
+    }
+    return existingAg;
   }
 
   Logger.log(">>> Creating new Ad Group: " + adGroupName);
-  const cpc = (config && config.cpc) ? config.cpc : 3.00;
   try {
     const builder = campaign.newAdGroupBuilder().withName(adGroupName).withCpc(cpc);
     const operation = builder.build();

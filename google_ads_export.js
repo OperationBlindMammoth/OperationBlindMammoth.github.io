@@ -33,6 +33,9 @@ function main() {
   // 4. Export Active Keywords Report
   exportKeywords(spreadsheet);
 
+  // 5. Export Promo Credit Pacing Tracker (Spend $500 before Nov 27)
+  exportPromoTracker(spreadsheet);
+
   Logger.log(">>> [5:00 PM] Export complete! Dashboard updated: " + spreadsheet.getUrl());
 }
 
@@ -140,4 +143,58 @@ function exportKeywords(ss) {
       row.metrics.conversions
     ]);
   }
+}
+
+function exportPromoTracker(ss) {
+  let sheet = ss.getSheetByName("Promo_Pacing_Tracker") || ss.insertSheet("Promo_Pacing_Tracker");
+  sheet.clear();
+
+  const PROMO_GOAL = 500.00;
+  // Expiration deadline: Nov 27, 2026
+  const PROMO_EXPIRY_DATE = new Date(2026, 10, 27, 23, 59, 59);
+  const TODAY = new Date();
+
+  // Query cumulative spend across all active and paused campaigns in the promo window
+  const query = `
+    SELECT campaign.name, metrics.cost_micros
+    FROM campaign
+    WHERE segments.date DURING LAST_60_DAYS AND campaign.status != 'REMOVED'
+  `;
+
+  let totalSpentMicros = 0;
+  const rows = AdsApp.search(query);
+  while (rows.hasNext()) {
+    const row = rows.next();
+    totalSpentMicros += row.metrics.costMicros;
+  }
+
+  const totalSpent = totalSpentMicros / 1000000;
+  const remainingSpend = Math.max(0, PROMO_GOAL - totalSpent);
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const daysLeft = Math.max(1, Math.ceil((PROMO_EXPIRY_DATE.getTime() - TODAY.getTime()) / msPerDay));
+  const requiredDailyRunRate = remainingSpend / daysLeft;
+
+  sheet.appendRow(["Metric", "Value", "Notes"]);
+  sheet.getRange(1, 1, 1, 3).setFontWeight("bold").setBackground("#cfe2ff");
+
+  sheet.appendRow(["Promo Credit Goal", "$" + PROMO_GOAL.toFixed(2), "Target spend to claim $500 free match"]);
+  sheet.appendRow(["Total Spend to Date", "$" + totalSpent.toFixed(2), "Cumulative account spend"]);
+  sheet.appendRow(["Remaining Spend Needed", "$" + remainingSpend.toFixed(2), "Spend required before cutoff"]);
+  sheet.appendRow(["Expiration Deadline", "November 27, 2026", "Promo credit expiration"]);
+  sheet.appendRow(["Calendar Days Remaining", daysLeft.toString(), "Days left until deadline"]);
+  sheet.appendRow(["Target Daily Run-Rate", "$" + requiredDailyRunRate.toFixed(2) + " / day", "Required average daily spend to hit $500"]);
+
+  let status = "ON TRACK";
+  if (totalSpent >= PROMO_GOAL) {
+    status = "GOAL REACHED - $500 CREDIT CLAIMED";
+  } else if (requiredDailyRunRate > 25) {
+    status = "URGENT - ACCELERATE SPEND (RAISE BIDS / EXPAND KEYWORDS)";
+  } else if (requiredDailyRunRate > 15) {
+    status = "MODERATE ATTENTION - KEEP BIDS COMPETITIVE";
+  } else {
+    status = "PACING ON TRACK ($12-$15/DAY TARGET)";
+  }
+
+  sheet.appendRow(["Pacing Status", status, "Updated automatically every evening at 5:00 PM"]);
+  sheet.getRange(8, 1, 1, 3).setFontWeight("bold").setBackground(totalSpent >= PROMO_GOAL ? "#d9ead3" : "#fff2cc");
 }

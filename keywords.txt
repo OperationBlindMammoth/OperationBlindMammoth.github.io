@@ -6,6 +6,7 @@
 # AD_GROUP: General LiDAR
 # Destination: https://densmoredroneservices.com/lidar
 # ========================================================
+# Proven High-Performing & Commercial Phrase Matches
 "drone surveying"
 "drone mapping"
 "drone lidar services"
@@ -27,49 +28,143 @@
 "infrastructure inspection drone"
 "lidar imagery"
 
+# High-Intent Volume Additions (Phrase Match)
+"drone survey"
+"aerial survey"
+"aerial surveying"
+"aerial mapping"
+"drone land survey"
+"drone land surveying"
+"topographic drone survey"
+"drone topo"
+"drone topography survey"
+"aerial lidar survey"
+"drone elevation survey"
+"commercial drone surveying"
+"drone survey company"
+"drone surveyor"
+"drone mapping services"
+"aerial mapping services"
+"lidar drone services"
+"houston drone survey"
+"texas drone survey"
+"drone survey cost"
+"boundary drone survey"
+"alta survey drone"
+"gis drone mapping"
+
+# High-Intent Broad Match (Filtered safely by negatives.txt)
+drone surveying services
+aerial lidar mapping
+drone topographic survey
+commercial drone survey company
+
 # ========================================================
 # AD_GROUP: Construction Earthwork
 # Destination: https://densmoredroneservices.com/photogrammetry
 # ========================================================
-"drone cut and fill analysis"
-"stockpile volume measurement drone"
-"drone earthwork survey"
-"drone topographic survey construction"
+# Core Earthwork & Civil Photogrammetry (Phrase Match)
+"drone earthwork"
+"drone cut and fill"
+"drone stockpile measurement"
+"drone stockpile volume"
+"stockpile volume drone"
+"stockpile measurement drone"
+"cut and fill drone"
+"earthwork drone"
+"drone construction survey"
+"construction drone survey"
+"construction drone mapping"
+"drone site survey"
+"site development drone"
+"civil drone survey"
+"civil engineering drone"
+"as built drone survey"
 "pre construction drone survey"
-"site development drone mapping"
+"drone volumetric survey"
+"earthwork volume drone"
+"houston construction drone"
+"texas construction drone"
+"drone earthwork survey"
 "construction progress drone documentation"
 "construction site drone monitoring"
 "houston construction drone survey"
-"as built drone survey"
 "drone surveying for civil engineering"
 "commercial site topo survey drone"
-"earthwork volume drone"
-"drone topo survey construction"
+"site development drone mapping"
+
+# High-Intent Broad Match
+drone cut and fill analysis
+drone stockpile volume measurement
+construction drone surveying
+earthwork volume drone survey
 
 # ========================================================
 # AD_GROUP: Thermal Inspection
 # Destination: https://densmoredroneservices.com/thermal
 # ========================================================
+# Commercial Roof, Solar & Industrial Thermography (Phrase Match)
 "drone thermal inspection"
+"thermal drone inspection"
+"thermal drone survey"
+"thermal drone services"
+"commercial thermal drone"
 "commercial drone thermal inspection"
+"drone roof inspection"
+"commercial roof drone inspection"
+"thermal roof inspection"
 "thermal roof inspection drone"
 "drone infrared inspection"
+"infrared drone inspection"
+"solar panel drone inspection"
+"drone solar inspection"
 "solar panel drone thermal inspection"
 "aerial thermal inspection"
+"aerial thermal imaging"
+"commercial aerial thermography"
+"aerial thermography"
 "drone roof moisture inspection"
+"roof moisture drone scan"
 "commercial aerial thermal imaging"
+"flir drone inspection"
+"radiometric drone inspection"
+"houston thermal drone"
+
+# High-Intent Broad Match
+drone thermal roof inspection
+commercial drone infrared inspection
+solar panel thermal drone inspection
+aerial thermography inspection
 
 # ========================================================
 # AD_GROUP: Multispectral Ag
 # Destination: https://densmoredroneservices.com/multispectral
 # ========================================================
+# Precision Crop Health & Prescription Mapping (Phrase Match)
+"multispectral drone"
 "multispectral drone mapping"
 "multispectral crop mapping"
+"ndvi drone"
 "ndvi drone mapping"
 "ndvi crop health mapping"
+"drone crop mapping"
+"crop health drone"
+"crop health drone survey"
+"ag drone mapping"
+"farm drone mapping"
+"drone mapping agriculture"
+"precision agriculture drone"
+"precision agriculture drone mapping"
+"drone prescription map"
 "variable rate prescription drone"
 "drone spot spray map"
 "dji agras prescription mapping"
-"precision agriculture drone mapping"
-"drone prescription map"
-"crop health drone survey"
+"dji agras mapping"
+"variable rate drone mapping"
+"texas ag drone"
+
+# High-Intent Broad Match
+multispectral drone mapping
+ndvi crop health drone
+precision ag drone mapping
+
