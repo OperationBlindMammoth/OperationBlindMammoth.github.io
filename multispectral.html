@@ -19,8 +19,10 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://densmoredroneservices.com/#organization","name":"Densmore Drone Services","telephone":"+1-281-799-3259","email":"curtis@densmoredroneservices.com","address":{"@type":"PostalAddress","addressLocality":"Spring","addressRegion":"TX","postalCode":"77379","addressCountry":"US"}},{"@type":"Service","name":"Multispectral Agricultural Drone Mapping","provider":{"@id":"https://densmoredroneservices.com/#organization"},"serviceType":"Precision Agriculture","description":"Multispectral NDVI drone mapping for Southeast Texas farmers. Detect crop stress before it's visible. Compatible with VRA sprayers. Cotton, corn, rice, sorghum."},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is NDVI and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"NDVI (Normalized Difference Vegetation Index) measures the ratio of near-infrared light reflected by plants versus red light absorbed for photosynthesis. Healthy plants reflect high NIR and absorb red. As a plant becomes stressed, its NIR reflection drops and red reflection rises. Our drone sensors capture this ratio across your entire field, producing a stress map weeks before visible yellowing appears."}},{"@type":"Question","name":"How much does the free demonstration cover?","acceptedAnswer":{"@type":"Answer","text":"The free demonstration covers up to 50 contiguous acres at your farm. We fly the field, process the data, and deliver a full NDVI map at no charge — so you can see exactly what the technology shows before committing to a paid survey."}},{"@type":"Question","name":"Can I import your maps into my VRA sprayer or spray drone?","acceptedAnswer":{"@type":"Answer","text":"Yes. We deliver georeferenced GeoTIFF files and Variable-Rate Application (VRA) prescription shapefiles (.shp) compatible with DJI Agras spray drones (T30, T40, T50), John Deere Gen 4, Raven, and Trimble displays."}},{"@type":"Question","name":"Do you provide chemical or fertilizer spraying services?","acceptedAnswer":{"@type":"Answer","text":"No. We specialize strictly in precision scouting, multispectral imaging, and prescription mapping under FAA Part 107. We do not sell chemicals and we do not spray. We are independent data specialists — our sole mission is providing you or your custom applicator with the exact prescription maps needed to save up to 20% on chemical inputs."}},{"@type":"Question","name":"What crops do you map?","acceptedAnswer":{"@type":"Answer","text":"We map cotton, corn, rice, sorghum, hay, soybeans, and other row crops across Southeast Texas."}}]}]}
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap');
         :root{--bg-color:#0b0f19;--surface-color:rgba(25,33,48,0.6);--border-color:rgba(255,255,255,0.1);--accent:#22c55e;--accent-dim:rgba(34,197,94,0.12);--accent-border:rgba(34,197,94,0.3);--text-main:#ffffff;--text-muted:#a0aec0;--glass-blur:blur(16px);}
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Inter',sans-serif;background-color:var(--bg-color);color:var(--text-main);overflow-x:hidden;line-height:1.6;}
@@ -37,12 +39,15 @@
         .nav-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(34,197,94,0.4);}
         .mobile-nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
         .mobile-nav-toggle span{display:block;width:24px;height:2px;background:var(--text-main);border-radius:2px;}
-        .mobile-nav-drawer{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(11,15,25,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);padding:20px 5%;flex-direction:column;gap:8px;z-index:999;}
+        .header-mobile-actions{display:none;align-items:center;gap:8px;}
+        .header-mobile-call-btn,.header-mobile-email-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:20px;font-size:0.8rem;font-weight:700;text-decoration:none;transition:all 0.2s ease;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);}
+        .header-mobile-call-btn:hover,.header-mobile-email-btn:hover{background:var(--accent);color:#000;}
+        .mobile-nav-drawer{display:none;position:fixed;top:60px;left:0;right:0;max-height:calc(100vh - 60px);overflow-y:auto;background:rgba(11,15,25,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-color);padding:20px 5%;flex-direction:column;gap:8px;z-index:999;}
         .mobile-nav-drawer.open{display:flex;}
         .mobile-nav-drawer .nav-link{font-size:0.95rem;padding:10px 0;border-bottom:1px solid var(--border-color);}
         .mobile-nav-drawer .nav-btn{text-align:center;margin-top:8px;color:#000;}
-        @media(max-width:1080px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
-        @media(max-width:480px){.logo{font-size:1rem;}}
+        @media(max-width:1080px){.nav-links{display:none;}.header-mobile-actions{display:flex;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:480px){.logo{font-size:0.95rem;}.header-mobile-call-btn span,.header-mobile-email-btn span{display:none;}.header-mobile-call-btn,.header-mobile-email-btn{padding:7px 9px;}section{padding:64px 5%;}}
         .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;padding:120px 5% 80px;overflow:hidden;text-align:center;}
         .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0.3;}
         .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(11,15,25,0.5) 0%,rgba(11,15,25,0.96) 80%);z-index:-1;}
@@ -136,7 +141,11 @@
         <a href="mailto:curtis@densmoredroneservices.com" class="nav-email-btn" title="Email us"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email</a>
         <a href="#demo" class="nav-btn">Free Demo</a>
     </nav>
-    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <div class="header-mobile-actions">
+        <a href="tel:2817993259" class="header-mobile-call-btn" aria-label="Call (281) 799-3259"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>Call</span></a>
+        <a href="mailto:curtis@densmoredroneservices.com" class="header-mobile-email-btn" aria-label="Email Curtis"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><span>Email</span></a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    </div>
 </header>
 <div class="mobile-nav-drawer" id="mobileNavDrawer">
     <a href="/" class="nav-link">Home</a><a href="/lidar" class="nav-link">LiDAR Surveys</a><a href="/thermal" class="nav-link">Thermal Inspection</a><a href="/photogrammetry" class="nav-link">Photogrammetry</a><a href="/inspection" class="nav-link">Aerial Inspection</a><a href="/multispectral" class="nav-link active">Multispectral / Ag</a><a href="/video" class="nav-link">Videography</a>
@@ -170,7 +179,7 @@
 <section id="science">
     <div class="section-inner">
         <div class="science-layout">
-            <img src="/NDVI_Cotton1_with_margin.png" alt="NDVI multispectral map of cotton field" class="science-img">
+            <img src="/NDVI_Cotton1_with_margin.png" alt="NDVI multispectral map of cotton field" class="science-img" loading="lazy" decoding="async">
             <div class="science-text">
                 <h2>Cut Costs. Protect Your Yields.</h2>
                 <p>Use less fertilizer, growth regulator, and defoliant by applying only where crops actually need it.</p>
@@ -232,7 +241,7 @@
         </div>
         <div class="crop-grid">
             <div class="crop-card">
-                <img src="/cotton.avif" alt="Cotton field multispectral mapping" class="crop-img">
+                <img src="/cotton.avif" alt="Cotton field multispectral mapping" class="crop-img" loading="lazy" decoding="async">
                 <div class="crop-body">
                     <h3>Cotton</h3>
                     <ul>
@@ -243,7 +252,7 @@
                 </div>
             </div>
             <div class="crop-card">
-                <img src="/corn.avif" alt="Corn field NDVI mapping" class="crop-img">
+                <img src="/corn.avif" alt="Corn field NDVI mapping" class="crop-img" loading="lazy" decoding="async">
                 <div class="crop-body">
                     <h3>Corn</h3>
                     <ul>
@@ -254,7 +263,7 @@
                 </div>
             </div>
             <div class="crop-card">
-                <img src="/rice.avif" alt="Rice field drone mapping" class="crop-img">
+                <img src="/rice.avif" alt="Rice field drone mapping" class="crop-img" loading="lazy" decoding="async">
                 <div class="crop-body">
                     <h3>Rice</h3>
                     <ul>
@@ -281,7 +290,7 @@
                 <p>Because humans cannot see NIR light, we can't detect this shrinking difference until the plant is already visibly yellowing. Our drone sensors capture this invisible data — allowing you to intervene weeks earlier.</p>
                 <div class="blockquote">NASA has used multispectral imaging and vegetation indices for decades. We bring this enterprise-level technology directly to your farm.</div>
             </div>
-            <img src="/how_ndvi_works.png" alt="How NDVI multispectral imaging works" class="science-img">
+            <img src="/how_ndvi_works.png" alt="How NDVI multispectral imaging works" class="science-img" loading="lazy" decoding="async">
         </div>
     </div>
 </section>
@@ -323,7 +332,7 @@
 
 <footer>
     <div class="footer-grid">
-        <div class="footer-brand"><span class="footer-logo">Densmore Drone Services</span><p>Serving the farmers of Southeast Texas. FAA Part 107 certified. Based in Spring, TX.</p><p style="margin-top:10px;"><a href="tel:2817993259" style="color:var(--accent);text-decoration:none;">(281) 799-3259</a><br><a href="mailto:curtis@densmoredroneservices.com" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;">curtis@densmoredroneservices.com</a></p></div>
+        <div class="footer-brand"><a href="/" class="footer-logo" style="text-decoration:none;">Densmore Drone Services</a><p>Serving the farmers of Southeast Texas. FAA Part 107 certified. Based in Spring, TX.</p><p style="margin-top:10px;"><a href="tel:2817993259" style="color:var(--accent);text-decoration:none;">(281) 799-3259</a><br><a href="mailto:curtis@densmoredroneservices.com" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;">curtis@densmoredroneservices.com</a></p></div>
         <div class="footer-col"><h4>Services</h4><ul><li><a href="/lidar">Aerial LiDAR</a></li><li><a href="/thermal">Thermal Inspection</a></li><li><a href="/photogrammetry">Photogrammetry</a></li><li><a href="/inspection">Aerial Inspection</a></li><li><a href="/multispectral">Multispectral / Ag</a></li><li><a href="/video">Videography & FPV</a></li></ul></div>
         <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="#demo">Free Demo</a></li><li><a href="#how-it-works">How It Works</a></li><li><a href="tel:2817993259">(281) 799-3259</a></li></ul></div>
     </div>
@@ -332,9 +341,10 @@
 
 <script>
     var mnt=document.getElementById('mobileNavToggle'),mnd=document.getElementById('mobileNavDrawer');
-    if(mnt&&mnd){mnt.addEventListener('click',function(){mnd.classList.toggle('open');});}
+    if(mnt&&mnd){mnt.addEventListener('click',function(){var isOpen=mnd.classList.toggle('open');mnt.setAttribute('aria-expanded',isOpen?'true':'false');});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mnd.classList.contains('open')){mnd.classList.remove('open');mnt.setAttribute('aria-expanded','false');}});}
     document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});if(mnd&&mnd.classList.contains('open'))mnd.classList.remove('open');}});});
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el){el.addEventListener('click',function(){if(typeof gtag==='function')gtag('event','contact_call_click',{event_category:'Direct Contact',event_label:'multispectral'});});});
+    document.querySelectorAll('a[href^="mailto:"]').forEach(function(el){el.addEventListener('click',function(){if(typeof gtag==='function')gtag('event','contact_email_click',{event_category:'Direct Contact',event_label:'multispectral'});});});
 </script>
 </body>
 </html>

@@ -78,9 +78,11 @@
     }
     </script>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap');
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
+    <style>
         :root {
             --bg-color: #0b0f19;
             --surface-color: rgba(25, 33, 48, 0.6);
@@ -220,6 +222,8 @@
             top: 60px;
             left: 0;
             right: 0;
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
             background: rgba(11,15,25,0.97);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
@@ -376,6 +380,9 @@
             .hero-contact-badge {
                 font-size: 0.82rem;
                 padding: 10px 14px;
+            }
+            .form-card {
+                padding: 24px 18px;
             }
         }
 
@@ -1095,6 +1102,7 @@
             <iframe 
                 src="https://www.youtube-nocookie.com/embed/TpbhR1ZhF34" 
                 title="Klein Collins Marching Band rehearsal | Densmore Drone Services" 
+                loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 referrerpolicy="strict-origin-when-cross-origin" 
                 allowfullscreen>
@@ -1139,7 +1147,7 @@
 <!-- ── COVERAGE ── -->
 <section class="coverage-section" id="coverage">
     <div class="coverage-inner">
-        <img src="/southeast_texas_service_area.svg" alt="Densmore Drone Services coverage area — Greater Houston and Southeast Texas">
+        <img src="/southeast_texas_service_area.svg" alt="Densmore Drone Services coverage area — Greater Houston and Southeast Texas" loading="lazy" decoding="async">
         <div class="coverage-text">
             <h2>Serving Greater Houston &amp; East Texas</h2>
             <p>Based in Spring, TX — no mobilization fee for sites within 100 miles. Coverage spans the Greater Houston metro and deep into East Texas.</p>
@@ -1242,7 +1250,7 @@
 <footer>
     <div class="footer-grid">
         <div class="footer-brand">
-            <span class="logo" style="-webkit-text-fill-color:unset; background:none; color:var(--accent-green); font-size:1.2rem;">Densmore Drone Services</span>
+            <a href="/" class="logo" style="-webkit-text-fill-color:unset; background:none; color:var(--accent-green); font-size:1.2rem;">Densmore Drone Services</a>
             <p>Professional commercial drone services in Greater Houston and Southeast Texas. FAA Part 107 certified. Based in Spring, TX.</p>
             <p style="margin-top:10px;"><a href="tel:2817993259" style="color:var(--accent-green);text-decoration:none;">(281) 799-3259</a><br>
             <a href="mailto:curtis@densmoredroneservices.com" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;">curtis@densmoredroneservices.com</a></p>
@@ -1280,7 +1288,14 @@
     var mobileNavDrawer = document.getElementById('mobileNavDrawer');
     if (mobileNavToggle && mobileNavDrawer) {
         mobileNavToggle.addEventListener('click', function() {
-            mobileNavDrawer.classList.toggle('open');
+            var isOpen = mobileNavDrawer.classList.toggle('open');
+            mobileNavToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileNavDrawer.classList.contains('open')) {
+                mobileNavDrawer.classList.remove('open');
+                mobileNavToggle.setAttribute('aria-expanded', 'false');
+            }
         });
     }
 
