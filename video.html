@@ -71,6 +71,11 @@
         .service-card ul{list-style:none;margin-top:14px;}
         .service-card ul li{font-size:0.85rem;color:var(--text-muted);padding:4px 0;display:flex;align-items:flex-start;gap:8px;}
         .service-card ul li::before{content:'→';color:var(--accent);flex-shrink:0;}
+        /* Video Showcase */
+        .showcase-section{border-top:1px solid var(--border-color);padding:80px 5%;background:radial-gradient(circle at 50% 10%,rgba(236,72,153,0.06) 0%,transparent 60%);}
+        .video-container{max-width:960px;margin:0 auto;}
+        .video-responsive{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:16px;border:1px solid var(--border-color);background:var(--surface-color);box-shadow:0 16px 40px rgba(0,0,0,0.5);}
+        .video-responsive iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
         /* Equipment */
         .equipment-section{background:linear-gradient(180deg,transparent 0%,rgba(236,72,153,0.04) 100%);border-top:1px solid var(--border-color);}
         .equipment-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;}
@@ -229,6 +234,25 @@
                     <li>Same-day raw footage available on request</li>
                 </ul>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="showcase-section" id="sample-work">
+    <div class="section-inner video-container">
+        <div class="section-header">
+            <span class="badge" style="display:inline-block;margin-bottom:12px;padding:4px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;font-size:0.75rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1px;">Sample Footage</span>
+            <h2>Featured Aerial Video</h2>
+            <p>Klein Collins Marching Band full run-through rehearsal captured with 4K aerial cinematography.</p>
+        </div>
+        <div class="video-responsive">
+            <iframe 
+                src="https://www.youtube-nocookie.com/embed/TpbhR1ZhF34" 
+                title="Klein Collins Marching Band rehearsal | Densmore Drone Services" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 </section>
