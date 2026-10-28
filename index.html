@@ -129,13 +129,14 @@
 
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
+            font-size: 1.35rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -280,7 +281,7 @@
             display: none;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1080px) {
             .nav-links { display: none; }
             .header-mobile-actions { display: flex; }
             .mobile-nav-toggle { display: flex; }
@@ -349,7 +350,7 @@
             }
         }
 
-        @media (min-width: 560px) and (max-width: 900px) {
+        @media (min-width: 560px) and (max-width: 1080px) {
             .hero-mobile-contact {
                 flex-direction: row;
                 justify-content: center;
@@ -984,7 +985,7 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
-    <img src="lidar_drone_hero.jpg" alt="Commercial drone services Greater Houston and Southeast Texas" class="hero-bg" fetchpriority="high">
+    <img src="/lidar_drone_hero.jpg" alt="Commercial drone services Greater Houston and Southeast Texas" class="hero-bg" fetchpriority="high">
     <div class="hero-overlay"></div>
     <div class="hero-container">
         <div class="hero-mobile-contact">
@@ -1138,7 +1139,7 @@
 <!-- ── COVERAGE ── -->
 <section class="coverage-section" id="coverage">
     <div class="coverage-inner">
-        <img src="southeast_texas_service_area.svg" alt="Densmore Drone Services coverage area — Greater Houston and Southeast Texas">
+        <img src="/southeast_texas_service_area.svg" alt="Densmore Drone Services coverage area — Greater Houston and Southeast Texas">
         <div class="coverage-text">
             <h2>Serving Greater Houston &amp; East Texas</h2>
             <p>Based in Spring, TX — no mobilization fee for sites within 100 miles. Coverage spans the Greater Houston metro and deep into East Texas.</p>

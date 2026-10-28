@@ -26,13 +26,13 @@
         body{font-family:'Inter',sans-serif;background-color:var(--bg-color);color:var(--text-main);overflow-x:hidden;line-height:1.6;}
         h1,h2,h3,h4{font-family:'Outfit',sans-serif;}
         header{position:fixed;top:0;width:100%;padding:16px 5%;z-index:1000;display:flex;justify-content:space-between;align-items:center;background:rgba(11,15,25,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color);}
-        .logo{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;background:linear-gradient(90deg,#ec4899,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+        .logo{font-family:'Montserrat',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:0.8px;background:linear-gradient(90deg,#ec4899,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;white-space:nowrap;}
         .nav-links{display:flex;align-items:center;gap:6px;}
         .nav-link{color:var(--text-muted);text-decoration:none;font-size:0.82rem;font-weight:500;padding:6px 10px;border-radius:6px;transition:color 0.2s;white-space:nowrap;}
         .nav-link:hover,.nav-link.active{color:var(--text-main);}
         .nav-divider{width:1px;height:18px;background:var(--border-color);margin:0 4px;}
-        .nav-phone-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.2s;white-space:nowrap;}
-        .nav-phone-btn:hover{background:rgba(236,72,153,0.22);}
+        .nav-phone-btn,.nav-email-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.2s;white-space:nowrap;}
+        .nav-phone-btn:hover,.nav-email-btn:hover{background:rgba(236,72,153,0.22);}
         .nav-btn{padding:8px 20px;background:var(--accent);color:#fff;border:none;border-radius:20px;font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.3s;text-decoration:none;white-space:nowrap;}
         .nav-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(236,72,153,0.4);}
         .mobile-nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
@@ -41,7 +41,8 @@
         .mobile-nav-drawer.open{display:flex;}
         .mobile-nav-drawer .nav-link{font-size:0.95rem;padding:10px 0;border-bottom:1px solid var(--border-color);}
         .mobile-nav-drawer .nav-btn{text-align:center;margin-top:8px;}
-        @media(max-width:900px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:1080px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:480px){.logo{font-size:1rem;}}
         .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;padding:120px 5% 80px;overflow:hidden;text-align:center;}
         .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0.35;}
         .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(11,15,25,0.5) 0%,rgba(11,15,25,0.97) 80%);z-index:-1;}
@@ -181,7 +182,7 @@
 </div>
 
 <section class="hero">
-    <img src="drone_hero_image.png" alt="Cinematic aerial drone videography Houston Texas" class="hero-bg" fetchpriority="high">
+    <img src="/drone_hero_image.png" alt="Cinematic aerial drone videography Houston Texas" class="hero-bg" fetchpriority="high">
     <div class="hero-overlay"></div>
     <div class="hero-container">
         <div class="badge">Cinematic Aerial &bull; FPV Indoor Tours &bull; SE Texas</div>
@@ -349,7 +350,7 @@
 <section class="coverage-section">
     <div class="section-inner">
         <div class="coverage-inner">
-            <img src="southeast_texas_service_area.svg" alt="Drone videography service area Houston Southeast Texas">
+            <img src="/southeast_texas_service_area.svg" alt="Drone videography service area Houston Southeast Texas">
             <div class="coverage-text">
                 <h2>Service Area</h2>
                 <p>Based in Spring, TX — no travel fee for shoots within 100 miles of Houston.</p>
@@ -370,7 +371,7 @@
             <details class="faq-item"><summary class="faq-question">What is included in the shoot price?<span class="faq-icon">+</span></summary><div class="faq-answer">Shoot pricing covers on-site flight time and all raw footage delivered digitally. Basic editing (assembly, audio sync, color correction) starts at $100. Custom editing with motion graphics, titles, and storytelling is quoted per project.</div></details>
             <details class="faq-item"><summary class="faq-question">How quickly can I receive my footage?<span class="faq-icon">+</span></summary><div class="faq-answer">Raw footage is typically delivered within 24 hours of the shoot via secure cloud download. Edited videos depend on project complexity but are usually delivered within 3–7 business days.</div></details>
             <details class="faq-item"><summary class="faq-question">Can you fly indoors for facility tours?<span class="faq-icon">+</span></summary><div class="faq-answer">Yes. The DJI Avata 2 is designed for indoor flight — compact with integrated propeller guards for safety in tight spaces. It produces smooth, cinematic walkthrough videos of warehouses, schools, event venues, and commercial facilities. The wide-angle lens and RockSteady stabilization deliver footage that no handheld camera can replicate.</div></details>
-            <details class="faq-item"><summary class="faq-question">Do you need FAA clearance to film?<span class="faq-icon">+</span></summary><div class="faq-answer">Yes, for all outdoor flights. Curtis holds an FAA Part 107 Commercial Remote Pilot Certificate. Airspace authorization (LAANC) is obtained automatically for controlled airspace near airports. Indoor flights do not require FAA authorization. All flights comply with FAA regulations.</div></details>
+            <details class="faq-item"><summary class="faq-question">Do you need FAA clearance to film?<span class="faq-icon">+</span></summary><div class="faq-answer">Yes, for all outdoor flights. All commercial flights are conducted by an FAA Part 107 Certified Commercial Remote Pilot. Airspace authorization (LAANC) is obtained automatically for controlled airspace near airports. Indoor flights do not require FAA authorization. All flights comply with FAA regulations.</div></details>
         </div>
     </div>
 </section>

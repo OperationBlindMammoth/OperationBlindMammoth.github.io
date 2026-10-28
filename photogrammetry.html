@@ -27,13 +27,13 @@
         h1,h2,h3,h4{font-family:'Outfit',sans-serif;}
         .glass-panel{background:var(--surface-color);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--border-color);border-radius:16px;}
         header{position:fixed;top:0;width:100%;padding:16px 5%;z-index:1000;display:flex;justify-content:space-between;align-items:center;background:rgba(11,15,25,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color);}
-        .logo{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;background:linear-gradient(90deg,#10b981,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+        .logo{font-family:'Montserrat',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:0.5px;background:linear-gradient(90deg,#10b981,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;white-space:nowrap;}
         .nav-links{display:flex;align-items:center;gap:6px;}
         .nav-link{color:var(--text-muted);text-decoration:none;font-size:0.82rem;font-weight:500;padding:6px 10px;border-radius:6px;transition:color 0.2s;white-space:nowrap;}
         .nav-link:hover,.nav-link.active{color:var(--text-main);}
         .nav-divider{width:1px;height:18px;background:var(--border-color);margin:0 4px;}
-        .nav-phone-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.2s;white-space:nowrap;}
-        .nav-phone-btn:hover{background:rgba(16,185,129,0.22);}
+        .nav-phone-btn,.nav-email-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.2s;white-space:nowrap;}
+        .nav-phone-btn:hover,.nav-email-btn:hover{background:rgba(16,185,129,0.22);}
         .nav-btn{padding:8px 20px;background:var(--accent);color:#fff;border:none;border-radius:20px;font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.3s;text-decoration:none;white-space:nowrap;}
         .nav-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(16,185,129,0.4);}
         .mobile-nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
@@ -42,7 +42,8 @@
         .mobile-nav-drawer.open{display:flex;}
         .mobile-nav-drawer .nav-link{font-size:0.95rem;padding:10px 0;border-bottom:1px solid var(--border-color);}
         .mobile-nav-drawer .nav-btn{text-align:center;margin-top:8px;}
-        @media(max-width:900px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:1080px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:480px){.logo{font-size:1rem;}}
         .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;padding:120px 5% 80px;overflow:hidden;text-align:center;}
         .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0.35;}
         .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(11,15,25,0.55) 0%,rgba(11,15,25,0.97) 80%);z-index:-1;}
@@ -173,7 +174,7 @@
 </div>
 
 <section class="hero">
-    <img src="drone_hero_image.png" alt="Drone photogrammetry cut and fill stockpile volumetrics Houston Texas" class="hero-bg" fetchpriority="high">
+    <img src="/drone_hero_image.png" alt="Drone photogrammetry cut and fill stockpile volumetrics Houston Texas" class="hero-bg" fetchpriority="high">
     <div class="hero-overlay"></div>
     <div class="hero-container">
         <div class="badge">Aerial Photogrammetry &bull; Construction &amp; Earthwork &bull; Greater Houston</div>
@@ -198,52 +199,52 @@
 <section id="services">
     <div class="section-inner">
         <div class="section-header">
-            <h2>Photogrammetry Deliverables</h2>
-            <p>Production-ready files your engineering and GIS teams can use immediately.</p>
+            <h2>Core Photogrammetry Deliverables</h2>
+            <p>Production-ready geospatial files formatted to drop directly into your engineering and GIS workflows.</p>
         </div>
         <div class="grid-2">
             <div class="service-card">
                 <div class="card-icon">🗺️</div>
-                <h3>2D Orthomosaic</h3>
-                <p>A geometrically corrected, high-resolution aerial map stitched from hundreds of overlapping photos. Accurate measurements anywhere on the map.</p>
+                <h3>2D Georeferenced Orthomosaics</h3>
+                <p>A geometrically corrected, high-resolution aerial map stitched from hundreds of overlapping photos — providing uniform scale and accurate measurements across the entire site.</p>
                 <ul>
                     <li>GeoTIFF format, georeferenced (WGS84 / TX State Plane)</li>
-                    <li>Resolution: 1–3 cm GSD at standard altitude</li>
-                    <li>Import directly into AutoCAD, ArcGIS, QGIS, or Google Earth</li>
-                    <li>Ideal for site documentation, boundary confirmation, progress tracking</li>
+                    <li>Resolution: 1–2.5 cm/pixel GSD at standard flight altitude</li>
+                    <li>Import directly into AutoCAD, Civil 3D, ArcGIS, QGIS, or Google Earth</li>
+                    <li>Ideal for site documentation, boundary overlays, and plan verification</li>
                 </ul>
             </div>
             <div class="service-card">
                 <div class="card-icon">🧊</div>
-                <h3>3D Point Cloud & Mesh</h3>
-                <p>Dense point cloud reconstruction and textured 3D mesh models for visualization, BIM integration, and structural analysis.</p>
+                <h3>3D Point Clouds &amp; Textured Meshes</h3>
+                <p>High-density photogrammetric point cloud reconstruction and photorealistic 3D mesh models for site visualization, BIM integration, and structural analysis.</p>
                 <ul>
-                    <li>LAS/LAZ point cloud, classified on request</li>
-                    <li>OBJ or FBX 3D textured mesh</li>
-                    <li>Compatible with Revit, Civil 3D, Navisworks</li>
-                    <li>Ideal for as-built documentation and site modeling</li>
+                    <li>LAS / LAZ point clouds, classified on request</li>
+                    <li>OBJ or FBX 3D textured mesh models</li>
+                    <li>Compatible with Revit, Civil 3D, InfraWorks, and Navisworks</li>
+                    <li>Ideal for as-built documentation and digital twin modeling</li>
                 </ul>
             </div>
             <div class="service-card">
-                <div class="card-icon">📐</div>
-                <h3>Volumetric Calculations</h3>
-                <p>Accurate cut/fill, stockpile volume, and earthwork quantity calculations — faster and safer than ground surveys.</p>
+                <div class="card-icon">⛰️</div>
+                <h3>Digital Surface &amp; Terrain Models (DSM / DTM)</h3>
+                <p>High-precision elevation rasters and contour polylines modeling graded surfaces, pads, detention ponds, and open-site topography.</p>
                 <ul>
-                    <li>Stockpile volume reports (tons or cubic yards)</li>
-                    <li>Cut/fill analysis with color-coded difference maps</li>
-                    <li>Progress billing support for earthwork contractors</li>
-                    <li>Repeat flights to track volume change over time</li>
+                    <li>32-bit floating-point GeoTIFF elevation grids</li>
+                    <li>1-foot and 2-foot elevation contours exported in .DXF, .DWG, and .SHP</li>
+                    <li>Slope and drainage gradient visualization</li>
+                    <li>RTK/PPK GNSS and Ground Control Point (GCP) calibration</li>
                 </ul>
             </div>
             <div class="service-card">
-                <div class="card-icon">🏗️</div>
-                <h3>Construction Progress Documentation</h3>
-                <p>Scheduled aerial mapping flights to document construction milestones, verify work-in-place, and support project management.</p>
+                <div class="card-icon">💻</div>
+                <h3>Civil 3D &amp; CAD-Ready Plan Overlays</h3>
+                <p>We deliver in your engineering department's active coordinate system — eliminating file conversion bottlenecks and datum mismatches.</p>
                 <ul>
-                    <li>Weekly, bi-weekly, or milestone-based scheduling</li>
-                    <li>Consistent flight paths for apples-to-apples comparison</li>
-                    <li>Annotated progress reports for owner/PM teams</li>
-                    <li>Supports pay app verification and dispute resolution</li>
+                    <li>Texas State Plane coordinate georeferencing (NAD83 / NAVD88)</li>
+                    <li>LandXML surface exports for immediate grading comparison</li>
+                    <li>Tile-split or compressed ECW/GeoTIFF options for fast CAD performance</li>
+                    <li>Comprehensive accuracy and calibration report included</li>
                 </ul>
             </div>
         </div>
@@ -255,52 +256,52 @@
     <div class="section-inner">
         <div class="section-header">
             <div class="badge" style="margin-bottom:12px;">Civil Engineering &amp; Commercial Construction</div>
-            <h2>Cut/Fill Verification, Stockpiles &amp; Progress Retainers</h2>
-            <p>Designed specifically for general contractors, civil developers, and earthwork estimators needing dependable geospatial proof before signing off on pay applications.</p>
+            <h2>Earthwork Volumetrics &amp; Progress Tracking</h2>
+            <p>Built for general contractors, civil developers, and earthwork estimators who need objective geospatial proof before signing off on subcontractor pay applications.</p>
         </div>
         <div class="grid-2">
             <div class="service-card" style="border-color:rgba(16,185,129,0.3);">
                 <div class="card-icon">📊</div>
                 <h3>Cut/Fill Elevation Difference Maps</h3>
-                <p>Quantify earthwork progress by comparing your active site against design grade (LandXML or CAD). We produce color-coded elevation heatmaps showing exactly where dirt needs to be moved.</p>
+                <p>Quantify earthwork progress by comparing your active site against design grade (LandXML or CAD) or prior flights, with color-coded heatmaps showing exact elevation deltas.</p>
                 <ul>
-                    <li>Net cut and fill volume calculations in cubic yards</li>
-                    <li>Avoid disputes and verify earthwork subcontractor invoices</li>
+                    <li>Net cut, fill, and balance calculations in cubic yards</li>
+                    <li>Verify earthwork subcontractor quantities prior to invoice approval</li>
                     <li>Export cross-sections and contour deltas for Civil 3D</li>
-                    <li>Fast turnaround: fly today, calculate tomorrow</li>
+                    <li>Fast 24–48 hour turnaround from flight to report</li>
                 </ul>
             </div>
             <div class="service-card" style="border-color:rgba(16,185,129,0.3);">
                 <div class="card-icon">🏔️</div>
                 <h3>Stockpile Volumetrics (Cubic Yards &amp; Tons)</h3>
-                <p>Rapid, high-accuracy volume calculation for aggregates, topsoil, crushed stone, and sand. Eliminates dangerous manual climbing and rough measuring-wheel estimates.</p>
+                <p>Rapid, high-accuracy volume calculation for aggregates, topsoil, crushed stone, and sand — eliminating hazardous manual pile climbing and rough wheel estimates.</p>
                 <ul>
-                    <li>Custom base-plane modeling for slopes and retaining walls</li>
-                    <li>Density factors applied to convert volume to tonnage</li>
+                    <li>Custom base-plane modeling for sloped yards and containment bins</li>
+                    <li>Material density factors applied to convert volume to tonnage</li>
                     <li>Formal PDF inventory certification reports for accounting &amp; audits</li>
-                    <li>Repeat measurements to track depletion rates over time</li>
+                    <li>Repeat measurements to track material depletion over time</li>
                 </ul>
             </div>
             <div class="service-card" style="border-color:rgba(16,185,129,0.3);">
                 <div class="card-icon">📅</div>
                 <h3>Scheduled Construction Progress Retainers</h3>
-                <p>Bi-weekly or monthly automated flight missions documenting every stage of construction from groundbreaking and utility trenching to slab pours and dry-in.</p>
+                <p>Weekly, bi-weekly, or milestone-based automated flight missions documenting every stage of construction from mass grading and utility trenching to slab pours and dry-in.</p>
                 <ul>
-                    <li>Repeatable, centimeter-accurate flight routes for perfect time-lapse alignment</li>
-                    <li>Provide banks, lenders, and out-of-town owners transparent visual proof</li>
-                    <li>Permanent record of subsurface plumbing and electrical before burial</li>
-                    <li>Dispute defense and change-order documentation</li>
+                    <li>Repeatable RTK flight paths for pixel-accurate time-lapse comparison</li>
+                    <li>Transparent visual proof for lenders, investors, and remote owners</li>
+                    <li>Permanent georeferenced record of underground utilities before backfill</li>
+                    <li>Discounted per-flight rates on recurring project schedules</li>
                 </ul>
             </div>
             <div class="service-card" style="border-color:rgba(16,185,129,0.3);">
-                <div class="card-icon">💻</div>
-                <h3>Civil 3D &amp; CAD-Ready Deliverables</h3>
-                <p>We speak your engineering department's language. No incompatible file types or conversion hassles — your data drops straight into your active coordinate system.</p>
+                <div class="card-icon">🛡️</div>
+                <h3>Pay-App Verification &amp; Dispute Documentation</h3>
+                <p>Protect your project budget and schedule with timestamped, measurable aerial evidence of site conditions and work-in-place at every billing cycle.</p>
                 <ul>
-                    <li>Texas State Plane coordinate georeferencing (NAD83 / NAVD88)</li>
-                    <li>High-res GeoTIFF raster base maps for CAD plan overlays</li>
-                    <li>Classified LAS/LAZ point clouds for surface generation</li>
-                    <li>1-ft and 2-ft elevation contours exported in .DXF and .DWG</li>
+                    <li>Objective third-party documentation of site readiness and quantities</li>
+                    <li>Pre-mobilization and post-demobilization condition records</li>
+                    <li>Annotated PDF executive summaries for project managers</li>
+                    <li>Cloud-hosted shareable links for project stakeholders</li>
                 </ul>
             </div>
         </div>
@@ -342,7 +343,7 @@
         <div class="use-cases-grid">
             <div class="use-case-chip"><div class="uc-icon">🏗️</div><h4>Construction</h4><p>Progress documentation and earthwork verification</p></div>
             <div class="use-case-chip"><div class="uc-icon">🏘️</div><h4>Land Development</h4><p>Grading plans and site layout</p></div>
-            <div class="use-case-chip"><div class="uc-icon">⚙️</div><h4>Engineering Firms</h4><span><p>As-built surveys and quantity takeoffs</p></span></div>
+            <div class="use-case-chip"><div class="uc-icon">⚙️</div><h4>Engineering Firms</h4><p>As-built surveys and quantity takeoffs</p></div>
             <div class="use-case-chip"><div class="uc-icon">🏛️</div><h4>Municipalities</h4><p>Infrastructure mapping and asset management</p></div>
             <div class="use-case-chip"><div class="uc-icon">⛏️</div><h4>Mining & Aggregates</h4><p>Stockpile volumes and pit progress</p></div>
         </div>
@@ -352,7 +353,7 @@
 <section class="coverage-section">
     <div class="section-inner">
         <div class="coverage-inner">
-            <img src="southeast_texas_service_area.svg" alt="Drone photogrammetry service area Houston Southeast Texas">
+            <img src="/southeast_texas_service_area.svg" alt="Drone photogrammetry service area Houston Southeast Texas">
             <div class="coverage-text">
                 <h2>Service Area</h2>
                 <p>Based in Spring, TX — no mobilization fee for sites within 100 miles of Houston.</p>

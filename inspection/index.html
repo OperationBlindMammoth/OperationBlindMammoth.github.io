@@ -26,13 +26,13 @@
         body{font-family:'Inter',sans-serif;background-color:var(--bg-color);color:var(--text-main);overflow-x:hidden;line-height:1.6;}
         h1,h2,h3,h4{font-family:'Outfit',sans-serif;}
         header{position:fixed;top:0;width:100%;padding:16px 5%;z-index:1000;display:flex;justify-content:space-between;align-items:center;background:rgba(11,15,25,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color);}
-        .logo{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;background:linear-gradient(90deg,#8b5cf6,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+        .logo{font-family:'Montserrat',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:0.8px;background:linear-gradient(90deg,#8b5cf6,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;white-space:nowrap;}
         .nav-links{display:flex;align-items:center;gap:6px;}
         .nav-link{color:var(--text-muted);text-decoration:none;font-size:0.82rem;font-weight:500;padding:6px 10px;border-radius:6px;transition:color 0.2s;white-space:nowrap;}
         .nav-link:hover,.nav-link.active{color:var(--text-main);}
         .nav-divider{width:1px;height:18px;background:var(--border-color);margin:0 4px;}
-        .nav-phone-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.2s;white-space:nowrap;}
-        .nav-phone-btn:hover{background:rgba(139,92,246,0.22);}
+        .nav-phone-btn,.nav-email-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.2s;white-space:nowrap;}
+        .nav-phone-btn:hover,.nav-email-btn:hover{background:rgba(139,92,246,0.22);}
         .nav-btn{padding:8px 20px;background:var(--accent);color:#fff;border:none;border-radius:20px;font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.3s;text-decoration:none;white-space:nowrap;}
         .nav-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(139,92,246,0.4);}
         .mobile-nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
@@ -41,7 +41,8 @@
         .mobile-nav-drawer.open{display:flex;}
         .mobile-nav-drawer .nav-link{font-size:0.95rem;padding:10px 0;border-bottom:1px solid var(--border-color);}
         .mobile-nav-drawer .nav-btn{text-align:center;margin-top:8px;}
-        @media(max-width:900px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:1080px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:480px){.logo{font-size:1rem;}}
         .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;padding:120px 5% 80px;overflow:hidden;text-align:center;}
         .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0.35;}
         .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(11,15,25,0.55) 0%,rgba(11,15,25,0.97) 80%);z-index:-1;}
@@ -153,7 +154,7 @@
 </div>
 
 <section class="hero">
-    <img src="drone_hero_image.png" alt="Aerial drone inspection Houston Texas" class="hero-bg" fetchpriority="high">
+    <img src="/drone_hero_image.png" alt="Aerial drone inspection Houston Texas" class="hero-bg" fetchpriority="high">
     <div class="hero-overlay"></div>
     <div class="hero-container">
         <div class="badge">Aerial Inspection &bull; Greater Houston &amp; SE Texas</div>
@@ -233,7 +234,7 @@
 <section class="coverage-section">
     <div class="section-inner">
         <div class="coverage-inner">
-            <img src="southeast_texas_service_area.svg" alt="Aerial inspection drone service area Houston Southeast Texas">
+            <img src="/southeast_texas_service_area.svg" alt="Aerial inspection drone service area Houston Southeast Texas">
             <div class="coverage-text">
                 <h2>Service Area</h2>
                 <p>Based in Spring, TX — no mobilization fee for sites within 100 miles of Houston.</p>
@@ -254,7 +255,7 @@
             <details class="faq-item"><summary class="faq-question">What resolution imagery will I receive?<span class="faq-icon">+</span></summary><div class="faq-answer">We deliver high-resolution images (20 MP+) from the onboard camera. For tower and close-proximity inspections, we use zoom capability to capture detail at safe standoff distances. All images include GPS coordinates and timestamps, delivered via secure cloud download within 24 hours.</div></details>
             <details class="faq-item"><summary class="faq-question">Can a drone inspect an energized electrical structure?<span class="faq-icon">+</span></summary><div class="faq-answer">Yes. Operating at safe standoff distances from energized equipment is one of the primary advantages of drone inspection. For combined thermal + visual electrical inspection, a dual-sensor payload captures both simultaneously — identifying both visual wear and thermal hotspots in a single flight.</div></details>
             <details class="faq-item"><summary class="faq-question">Do I get a written report?<span class="faq-icon">+</span></summary><div class="faq-answer">Yes. Every inspection includes an annotated PDF report with GPS-tagged imagery, observations, and any deficiencies noted during the inspection. Reports can be formatted to match your specific documentation requirements or work order system.</div></details>
-            <details class="faq-item"><summary class="faq-question">Are you FAA certified for commercial inspections?<span class="faq-icon">+</span></summary><div class="faq-answer">Yes. All flights are conducted under Curtis's FAA Part 107 Commercial Remote Pilot Certificate. LAANC authorization is obtained automatically for controlled airspace. Full flight documentation and logs are available upon request.</div></details>
+            <details class="faq-item"><summary class="faq-question">Are you FAA certified for commercial inspections?<span class="faq-icon">+</span></summary><div class="faq-answer">Yes. All flights are conducted by an FAA Part 107 Certified Commercial Remote Pilot. LAANC authorization is obtained automatically for controlled airspace. Full flight documentation and logs are available upon request.</div></details>
         </div>
     </div>
 </section>

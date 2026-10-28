@@ -26,13 +26,13 @@
         body{font-family:'Inter',sans-serif;background-color:var(--bg-color);color:var(--text-main);overflow-x:hidden;line-height:1.6;}
         h1,h2,h3,h4{font-family:'Outfit',sans-serif;}
         header{position:fixed;top:0;width:100%;padding:16px 5%;z-index:1000;display:flex;justify-content:space-between;align-items:center;background:rgba(11,15,25,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color);}
-        .logo{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;background:linear-gradient(90deg,#22c55e,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+        .logo{font-family:'Montserrat',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:0.8px;background:linear-gradient(90deg,#22c55e,#4ade80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;white-space:nowrap;}
         .nav-links{display:flex;align-items:center;gap:6px;}
         .nav-link{color:var(--text-muted);text-decoration:none;font-size:0.82rem;font-weight:500;padding:6px 10px;border-radius:6px;transition:color 0.2s;white-space:nowrap;}
         .nav-link:hover,.nav-link.active{color:var(--text-main);}
         .nav-divider{width:1px;height:18px;background:var(--border-color);margin:0 4px;}
-        .nav-phone-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.2s;white-space:nowrap;}
-        .nav-phone-btn:hover{background:rgba(34,197,94,0.22);}
+        .nav-phone-btn,.nav-email-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:20px;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.2s;white-space:nowrap;}
+        .nav-phone-btn:hover,.nav-email-btn:hover{background:rgba(34,197,94,0.22);}
         .nav-btn{padding:8px 20px;background:var(--accent);color:#000;border:none;border-radius:20px;font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.3s;text-decoration:none;white-space:nowrap;}
         .nav-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(34,197,94,0.4);}
         .mobile-nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
@@ -41,7 +41,8 @@
         .mobile-nav-drawer.open{display:flex;}
         .mobile-nav-drawer .nav-link{font-size:0.95rem;padding:10px 0;border-bottom:1px solid var(--border-color);}
         .mobile-nav-drawer .nav-btn{text-align:center;margin-top:8px;color:#000;}
-        @media(max-width:900px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:1080px){.nav-links{display:none;}.mobile-nav-toggle{display:flex;}}
+        @media(max-width:480px){.logo{font-size:1rem;}}
         .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;padding:120px 5% 80px;overflow:hidden;text-align:center;}
         .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0.3;}
         .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(11,15,25,0.5) 0%,rgba(11,15,25,0.96) 80%);z-index:-1;}
@@ -132,6 +133,7 @@
         <a href="/" class="nav-link">Home</a><a href="/lidar" class="nav-link">LiDAR</a><a href="/thermal" class="nav-link">Thermal</a><a href="/photogrammetry" class="nav-link">Photogrammetry</a><a href="/inspection" class="nav-link">Inspection</a><a href="/multispectral" class="nav-link active">Multispectral</a><a href="/video" class="nav-link">Video</a>
         <div class="nav-divider"></div>
         <a href="tel:2817993259" class="nav-phone-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.09-1.09a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>(281) 799-3259</a>
+        <a href="mailto:curtis@densmoredroneservices.com" class="nav-email-btn" title="Email us"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email</a>
         <a href="#demo" class="nav-btn">Free Demo</a>
     </nav>
     <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation"><span></span><span></span><span></span></button>
@@ -139,11 +141,12 @@
 <div class="mobile-nav-drawer" id="mobileNavDrawer">
     <a href="/" class="nav-link">Home</a><a href="/lidar" class="nav-link">LiDAR Surveys</a><a href="/thermal" class="nav-link">Thermal Inspection</a><a href="/photogrammetry" class="nav-link">Photogrammetry</a><a href="/inspection" class="nav-link">Aerial Inspection</a><a href="/multispectral" class="nav-link active">Multispectral / Ag</a><a href="/video" class="nav-link">Videography</a>
     <a href="tel:2817993259" class="nav-link" style="color:var(--accent);">(281) 799-3259</a>
+    <a href="mailto:curtis@densmoredroneservices.com" class="nav-link" style="color:var(--accent);">curtis@densmoredroneservices.com</a>
     <a href="#demo" class="nav-btn">Free Demo</a>
 </div>
 
 <section class="hero">
-    <img src="NDVI_Cotton1_with_margin.png" alt="Multispectral NDVI drone map cotton field Southeast Texas" class="hero-bg" fetchpriority="high">
+    <img src="/NDVI_Cotton1_with_margin.png" alt="Multispectral NDVI drone map cotton field Southeast Texas" class="hero-bg" fetchpriority="high">
     <div class="hero-overlay"></div>
     <div class="hero-container">
         <div class="badge">Precision Agriculture &bull; Southeast Texas Farmers</div>
@@ -167,7 +170,7 @@
 <section id="science">
     <div class="section-inner">
         <div class="science-layout">
-            <img src="NDVI_Cotton1_with_margin.png" alt="NDVI multispectral map of cotton field" class="science-img">
+            <img src="/NDVI_Cotton1_with_margin.png" alt="NDVI multispectral map of cotton field" class="science-img">
             <div class="science-text">
                 <h2>Cut Costs. Protect Your Yields.</h2>
                 <p>Use less fertilizer, growth regulator, and defoliant by applying only where crops actually need it.</p>
@@ -229,7 +232,7 @@
         </div>
         <div class="crop-grid">
             <div class="crop-card">
-                <img src="cotton.avif" alt="Cotton field multispectral mapping" class="crop-img">
+                <img src="/cotton.avif" alt="Cotton field multispectral mapping" class="crop-img">
                 <div class="crop-body">
                     <h3>Cotton</h3>
                     <ul>
@@ -240,7 +243,7 @@
                 </div>
             </div>
             <div class="crop-card">
-                <img src="corn.avif" alt="Corn field NDVI mapping" class="crop-img">
+                <img src="/corn.avif" alt="Corn field NDVI mapping" class="crop-img">
                 <div class="crop-body">
                     <h3>Corn</h3>
                     <ul>
@@ -251,7 +254,7 @@
                 </div>
             </div>
             <div class="crop-card">
-                <img src="rice.avif" alt="Rice field drone mapping" class="crop-img">
+                <img src="/rice.avif" alt="Rice field drone mapping" class="crop-img">
                 <div class="crop-body">
                     <h3>Rice</h3>
                     <ul>
@@ -278,7 +281,7 @@
                 <p>Because humans cannot see NIR light, we can't detect this shrinking difference until the plant is already visibly yellowing. Our drone sensors capture this invisible data — allowing you to intervene weeks earlier.</p>
                 <div class="blockquote">NASA has used multispectral imaging and vegetation indices for decades. We bring this enterprise-level technology directly to your farm.</div>
             </div>
-            <img src="how_ndvi_works.png" alt="How NDVI multispectral imaging works" class="science-img">
+            <img src="/how_ndvi_works.png" alt="How NDVI multispectral imaging works" class="science-img">
         </div>
     </div>
 </section>
